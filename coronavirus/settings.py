@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'forum',
     # Other
-    'storage',
+    'storages',
 ]
 
 MIDDLEWARE = [
