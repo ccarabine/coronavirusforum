@@ -1,1 +1,1 @@
-web: gunicorn coronavirusforum.wsgi
+web: gunicorn coronavirus.wsgi
