@@ -1,0 +1,36 @@
+<div class="collapse navbar-collapse" id="main-nav">
+    <ul class="navbar-nav w-auto mx-auto">
+        <li class="nav-item">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'home' %}" id="home-link">
+                Home
+            </a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="topics-link"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Topics
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="topic-links">
+
+                <!-- Need to update for the dymatic list-->
+                <a href="#" class="dropdown-item">Children and Coronavirus</a>
+                <a href="#" class="dropdown-item">HCP Chat</a>
+                <a href="#" class="dropdown-item">General Cornavirus Chat</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="nhs-api"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Lastest info from NHS
+            </a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="about-us-link"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                About Us
+            </a>
+        </li>
+
+    </ul>
+</div>

@@ -1,0 +1,42 @@
+/* resets styling attributes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* padding and border are included in the width and height*/
+  }
+  
+ 
+
+
+/* added variable for colours */
+:root {
+    --color-text: white;
+    --color-text-secondary:#58595b ;
+    --color-text-button: #000000;
+    --color-background-primary: #367588;
+    --color-background-secondary: #FF6F59;
+    --color-background-tertiary: #11262C;
+    --color-background-button: #697d96;
+  }
+
+.txt-color{
+    color:white
+}
+
+ body{
+    color:var(--color-text);
+ }
+
+.ft-container {
+    background-color: var(--color-background-primary);
+    
+}
+
+.ft-center{
+    text-align:center;
+}
+
+a:link {
+    text-decoration: none;
+  }
