@@ -5,56 +5,76 @@
 
 <head>
     <title>Corona Virus Forum</title>
-
+    <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Required meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 </head>
 
-<body class="d-flex flex-column h-100 main-bg">
+<body class="d-flex flex-column h-100">
     {% include 'navbar.html' %}
 
 
-    <main class="flex-shrink-0 main-bg">
+    <main>
+        <hr class="block-divider block-divider--short block-divider--white">
         {% block content %}
         <!-- Content Goes here -->
         {% endblock content %}
     </main>
 
     <!-- Footer -->
-    <footer class="footer mt-auto py-3">
+    <footer class="footer mt-auto">
         <div class="ft-container">
-            <div class="row mx-auto ft-center">
-                <div class="col-3 txt-color">
+            <div class="row mx-auto ft-center pt-3 pb-3">
+                <div class="col-3 col-md-4 ft-links">
                     <a href="#" class="txt-color">Talk Guidelines </a>
-                    
+
                 </div>
-                <div class="col-3 txt-color">
-                    <a href="#"class="txt-color">Contact Us</a>
+                <div class="col-3 col-md-4 ft-links">
+                    <a href="#" class="txt-color">Contact Us</a>
                 </div>
-                <div class="col-6 mt-2">
+                <div class="col-6 col-md-4 mt-1 ft-links">
                     <a href="https://www.twitter.com" target="_blank" rel="noreferrer"
                         aria-label="Go to our twitter page (opens in new tab)" title="twitter"><i
-                            class="fab fa-twitter fa-2x txt-color"></i></a>
+                            class="fab fa-twitter fa-2x mar-right"></i></a>
                     <a href="https://www.youtube.com" target="_blank" rel="noreferrer"
                         aria-label="Go to our youtube page (opens in new tab)" title="youtube"><i
-                            class="fab fa-youtube fa-2x txt-color"></i></a>
+                            class="fab fa-youtube fa-2x mar-right"></i></a>
                     <a href="https://www.instagram.com" target="_blank" rel="noreferrer"
                         aria-label="Go to our instagram page (opens in new tab)" title="instagram"><i
-                            class="fab fa-instagram fa-2x txt-color"></i></a>
+                            class="fab fa-instagram fa-2x"></i></a>
                 </div>
             </div>
         </div>
     </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
+
+    <script src="{% static 'js/script.js' %}"></script>
+
 </body>
 
 </html>

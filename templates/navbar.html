@@ -2,18 +2,18 @@
 
 
 <!-- Header -->
-<header class="container-fluid fixed-top background-white">
+<header class="container-fluid sticky-top bg-white">
     <!-- Navbar -->
-    <div id="topnav" class="row pt-lg-2 d-none d-lg-flex">
-        <div class="col-12 col-lg-3 my-auto py-1 py-lg-0 text-center text-lg-left">
+    <div id="topnav" class="row pt-md-3 d-none d-md-flex ">
+        <div class="col-12 col-md-3 my-auto py-1 py-lg-0 text-center text-lg-left">
             <a href="{% url 'home' %}">
-                <img src="{% static 'images/covid_logo1.png' %}" style="width:40px;"
-                    class="logo logo-font text-black my-0" alt="website logo">
+                <img src="{% static 'images/coronavirus_logo.jpg' %}" style="width:80px;"
+                    class="logo logo-font  my-0" alt="website logo">
             </a>
         </div>
 
         <!-- Search area -->
-        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+        <div class="col-12 col-md-6 my-auto py-1 py-lg-0">
             <form method="GET" action="#">
                 <div class="input-group w-100">
                     <label for="search" hidden>Search</label>
@@ -28,14 +28,14 @@
             </form>
         </div>
         <!-- My account -->
-        <div class="col-12 col-lg-5 my-auto py-1 py-lg-0">
+        <div class="col-12 col-md-3 my-auto py-1 py-lg-0">
             <ul class="list-inline list-unstyled text-center text-lg-right my-0">
                 <li class="list-inline-item dropdown">
-                    <a class="text-black nav-link" href="#" id="user-options" data-bs-toggle="dropdown"
+                    <a class=" nav-color" href="#" id="user-options" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <div class="text-center">
-                            <div><i class="fas fa-user fa-lg"></i></div>
-                            <p class="my-0">My Account</p>
+                            <div><i class="fas fa-user fa-lg nav-color"></i></div>
+                            <p class="my-0 nav-color">My Account</p>
                         </div>
                     </a>
                     <div class="dropdown-menu border-0" aria-labelledby="user-options">
@@ -54,7 +54,7 @@
     </div>
     <!-- Mobile and main nav area -->
     <div class="row bg-white">
-        <nav class="navbar navbar-expand-lg navbar-light w-100">
+        <nav class="navbar navbar-expand-md navbar-light w-100">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
                 aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -63,8 +63,8 @@
             {% include 'includes/nav-menu.html' %}
         </nav>
     </div>
-   
 
+   
 </header>
 
 
