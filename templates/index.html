@@ -42,4 +42,23 @@
 </div>
 <hr>
 
+<!-- Latest posts -->
+<div>
+ 
+</div>
+<div class="container">
+  <h1 class="header-style bg-color-primary txt-color ">Latest posts</h1>
+  {% for post in post_list %}
+  <div class="card mb-1">
+    <div class="card-body">
+
+      <h4 class="card-title">{{ post.title }}</h4>
+      <hr>
+      <h6> 22 Comments  Created {{ post.created }}</h6>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
 {%endblock%}
