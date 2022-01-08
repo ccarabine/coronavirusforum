@@ -88,6 +88,8 @@ a:link {
   background-color: var(--color-background-secondary);
   color: var(--color-text);
 }
-.post-header{
+.pagination{
+  font-size: 2em;
+  
   
 }

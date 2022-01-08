@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div>
+
+</div>
+<div class="container">
+    <h1 class="header-style bg-color-primary txt-color ">Latest posts</h1>
+    {% for post in post_list %}
+    <div class="card mb-1">
+        <div class="card-body">
+
+            <h4 class="card-title">{{ post.title }}</h4>
+            <hr>
+            <h6> 22 Comments Created {{ post.created }}</h6>
+        </div>
+    </div>
+    {% endfor %}
+
+
+    {% if is_paginated %}
+    <nav class="pagination justify-content-center" aria-label="Page navigation">
+        <ul class="pagination"></ul>
+            {% if page_obj.has_previous %}
+                <li class="mr-2"><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+
+            {% for i in paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <li class="active mr-2"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                    <li class="mr-2"><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+        
+            {% endfor %}
+        </ul>
+
+        {% if page_obj.has_next %}
+            <li class="mr-2"><a href="?page={{ page_obj.next_page_number }}">&raquo;</a> </li>
+        {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+    </nav>
+    {% endif %}
+</div>
+{%endblock%}
