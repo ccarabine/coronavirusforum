@@ -88,11 +88,22 @@ a:link {
   background-color: var(--color-background-secondary);
   color: var(--color-text);
 }
+
+/* --- Pagination --- */
 .pagination{
-  font-size: 2em;
-  
-  
+  margin-top:5px;
+  font-size: 1em;
+ 
 }
+
+.page-link {
+  color: var(--color-background-tertiary);
+}
+.page-item.active .page-link {
+  background-color: var(--color-background-primary);
+  color: var(--color-text);
+}
+
 .post-border{
   border-style: solid;
   padding: 3px;
@@ -100,3 +111,4 @@ a:link {
 a {
   color: var(--color-text);
 }
+
