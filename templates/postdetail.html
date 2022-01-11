@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div>
+
+</div>
+
+
+<div class="container">
+
+    <div class="post-border">
+     
+        <div class="card mb-1">
+            <a href="{{ post.get_absolute_url }}">
+                <div class="card-body">
+
+                    <h4 class="card-title">{{ post.title }}</h4>
+                    <hr>
+                    <h4 class="card-title">{{ post.excerpt }}</h4> 
+                    <h6> 22 Comments Created {{ post.created }}</h6>
+            
+                </div>
+            </a>
+        </div>
+      
+    </div>
+</div>
+
+</div>
+{%endblock%}

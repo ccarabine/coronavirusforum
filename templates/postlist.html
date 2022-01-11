@@ -18,7 +18,7 @@
         <div class="card mb-1">
             <a href="{{ post.get_absolute_url }}">
                 <div class="card-body">
-
+                    <a href="{% url 'postdetail' post.pk %}">
                     <h4 class="card-title">{{ post.title }}</h4>
                     <hr>
                     <h6> 22 Comments Created {{ post.created }}</h6>

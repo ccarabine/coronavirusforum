@@ -28,3 +28,12 @@ def topic_list(request):  # gets the topic list for the navbar
         "topic_list": topic_list,
     }
     return context
+
+class PostDetail(DetailView):
+    model = Post
+    template_name = "postdetail.html"
+    
+   # def get(self, request, slug, *args, **kwarg):
+   #     queryset = Post.objects
+   #     post = get_object_or_404(queryset, slug=slug)
+   #     comment = post.comments.order_by('created')
