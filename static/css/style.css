@@ -93,3 +93,10 @@ a:link {
   
   
 }
+.post-border{
+  border-style: solid;
+  padding: 3px;
+}
+a {
+  color: var(--color-text);
+}

@@ -78,6 +78,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "forum.views.topic_list",
             ],
         },
     },
@@ -87,16 +88,13 @@ WSGI_APPLICATION = "coronavirus.wsgi.application"
 
 CSRF_TRUSTED_ORIGINS = [
     "https://8000-magenta-raven-g5b6gq55.ws-eu25.gitpod.io",
-
-    ]
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 if "DATABASE_URL" in os.environ:
-    DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
-        }
+    DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
 else:
     print("Postgres URL not found, using sqlite instead")
     DATABASES = {
@@ -115,16 +113,13 @@ AUTH_PASSWORD_VALIDATORS = [
         "UserAttributeSimilarityValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation."
-        "MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation." "MinimumLengthValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation."
-        "CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation." "CommonPasswordValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation."
-        "NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation." "NumericPasswordValidator",
     },
 ]
 

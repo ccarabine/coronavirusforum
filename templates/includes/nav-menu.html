@@ -4,20 +4,24 @@
             <a class="logo-font font-weight-bold nav-link nav-color mr-5" href="{% url 'home' %}" id="home-link">
                 HOME
             </a>
-            
+
         </li>
         <li class="nav-item dropdown">
             <a class="logo-font font-weight-bold nav-link nav-color mr-5" href="#" id="topics-link"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                TOPICS
+                TOPICS {{ topic.name }}
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="topic-links">
 
-                <!-- Need to update for the dymatic list-->
-                <a href="#" class="dropdown-item">Children and Coronavirus</a>
-                <a href="#" class="dropdown-item">HCP Chat</a>
-                <a href="#" class="dropdown-item">General Cornavirus Chat</a>
+            <div class="dropdown-menu border-0" aria-labelledby="topic-links">
+              
+                {% for topic in topic_list %}
+                    <a href="/topic/{{ topic.name }}"
+                        class="dropdown-item nav-color">{{ topic.name|title }}
+                    </a>
+                {% endfor %}
+              
             </div>
+
         </li>
 
         <li class="nav-item dropdown">

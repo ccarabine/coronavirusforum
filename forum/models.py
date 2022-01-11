@@ -77,7 +77,8 @@ class Post(models.Model):
         )
 
     class Meta:
-        verbose_name_plural = "Post"
+        verbose_name = "Post"
+        verbose_name_plural = "Posts"
         ordering = ["-created"]
 
     def __str__(self):
@@ -106,7 +107,8 @@ class Vote(models.Model):
         )
 
     class Meta:
-        verbose_name_plural = "Vote"
+        verbose_name = "Vote"
+        verbose_name_plural = "Votes"
 
 
 class Comment(models.Model):
@@ -129,7 +131,8 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ["created"]
-        verbose_name_plural = "Comment"
+        verbose_name = "Comment"
+        verbose_name_plural = "Comments"
 
     def __str__(self):
         return f"Comment {self.comment_body} by {self.name}"
