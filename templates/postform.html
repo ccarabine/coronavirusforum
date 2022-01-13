@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Create a new post {% endblock %}
+{% block content %}
+<div>
+
+</div>
+
+
+<div class="container">
+
+    <h4 class="header-style bg-color-primary txt-color"> Topic: {{ topic }}</h4>
+
+    <div class="card mb-2 pl-2 pt-1 pb-1">
+        <h6> Add your post here 
+            <a href="#" class="txt-color-secondary pl-5 "> Talk guidelines</a>
+        </h6>
+        <div class="form-group">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                
+                <button type="submit" class="btn btn-secondary">Post</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}

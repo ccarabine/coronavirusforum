@@ -3,26 +3,23 @@
 
 {% block content %}
 <div>
-
+    
 </div>
 
 
 <div class="container">
-    <h4 class="header-style bg-color-primary txt-color"> Topic: {{ post_list.top }}</h4>
+    <h4 class="header-style bg-color-primary txt-color"> Topic: {{ topic }}</h4>
 
     <div class="post-border">
-        <h6> -> Start a new post within this topic</h6>
+        <h6><a href="{% url 'addpost' topic %}" class="txt-color-secondary"> -> Start a new post within this topic></a></h6> 
         {% for post in post_list %}
-
-
         <div class="card mb-1">
             <a href="{{ post.get_absolute_url }}">
                 <div class="card-body">
-                    <a href="{% url 'postdetail' post.pk %}">
-                    <h4 class="card-title">{{ post.title }}</h4>
-                    <hr>
-                    <h6> 22 Comments Created {{ post.created }}</h6>
-            
+                    <a href="{% url 'postdetail' post.id %}">
+                        <h4 class="card-title">{{ post.title }}</h4>
+                        <hr>
+                        <h6> 22 Comments Created {{ post.created }}</h6>
                 </div>
             </a>
         </div>
@@ -35,7 +32,7 @@
     {% if page_obj.has_previous %}
     <li class="page-item "><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
     {% else %}
-    <li class="page-item disabled"><span class="page-link" >&laquo;</span></li>
+    <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
     {% endif %}
 
     {% for i in paginator.page_range %}

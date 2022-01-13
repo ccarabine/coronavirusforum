@@ -26,6 +26,10 @@
 .txt-color{
   color: var(--color-text);
 }
+.txt-color-secondary{
+  color: var(--color-text-secondary);
+}
+
 .mar-right {
   margin-right: 10px;
 }

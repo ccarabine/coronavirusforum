@@ -8,24 +8,34 @@
 
 
 <div class="container">
-
+    <h4 class="header-style bg-color-primary txt-color"> Topic: {{ post.topic }}</h4>
     <div class="post-border">
-     
+
         <div class="card mb-1">
-            <a href="{{ post.get_absolute_url }}">
-                <div class="card-body">
 
-                    <h4 class="card-title">{{ post.title }}</h4>
-                    <hr>
-                    <h4 class="card-title">{{ post.excerpt }}</h4> 
-                    <h6> 22 Comments Created {{ post.created }}</h6>
-            
-                </div>
-            </a>
+            <div class="card-body">
+
+                <h4 class="card-title">{{ post.title | safe }}</h4>
+                <hr>
+                <h4 class="card-title">{{ post.excerpt | safe }}</h4>
+                <h6> 22 Comments Created {{ post.created }}</h6>
+
+                {% if post.post_image %}
+                <a href="{% url 'postdetail' post.id %}">
+                    <img src="{{ post.post_image.url }}" class="card-img-top" alt="{{ post.name }}">
+                </a>
+               
+              
+                {% endif %}
+
+            </div>
+
         </div>
-      
+
+
     </div>
-</div>
 
 </div>
+
+
 {%endblock%}

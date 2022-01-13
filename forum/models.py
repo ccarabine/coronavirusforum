@@ -59,7 +59,8 @@ class Post(models.Model):
     post_image = models.ImageField(
         verbose_name=("post_image"),
         null=True,
-        blank=True
+        blank=True,
+        upload_to=""
         )
     upvote = models.IntegerField(
         verbose_name=("upvote"),
@@ -83,6 +84,9 @@ class Post(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+    def get_absolute_url(self):
+        return f"/topic/{self.pk}/"
 
 
 class Vote(models.Model):
