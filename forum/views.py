@@ -1,6 +1,7 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.contrib.messages.views import SuccessMessageMixin
 from .models import Post, Topic
 from.forms import PostForm
 
@@ -57,3 +58,12 @@ def addPost(request, topic):
             return redirect(reverse('postdetail', args=[post.id]))
     context = {'form': form, 'topic': topic}
     return render(request, "postform.html", context)
+
+class UpdatePostView(SuccessMessageMixin, UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'updatepost.html'
+    success_message = 'Post updated'
+    #fields = ('title', 'body', 'post_image',
+     #         'enable_voting')
+

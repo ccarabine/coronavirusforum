@@ -3,7 +3,7 @@
 # 3rd party:
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.shortcuts import reverse
 
 class Topic(models.Model):
 
@@ -91,7 +91,7 @@ class Post(models.Model):
         return str(self.title)
 
     def get_absolute_url(self):
-        return f"/topic/{self.pk}/"
+        return f"/topic/{self.pk}"
 
 
 class Vote(models.Model):

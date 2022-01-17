@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} Edit post {% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row mx-auto justify-content-center">
+        <div class="col-md-10 col-sm-12">
+            <h4 class="header-style bg-color-primary txt-color"> Topic: {{ post.topic }}</h4>
+            <div class="background-color-secondary mb-2 pl-2 pt-1 pb-1 justify-content-center">
+                <div class="col-12">
+                   
+                    <h6> Edit post
+                        <a href="#" class="txt-color-secondary pl-5 "> Talk guidelines</a>
+                    </h6>
+
+                    <div class="form-group">
+
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% crispy form %}
+                          
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{%endblock%}
