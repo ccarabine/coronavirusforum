@@ -2,8 +2,10 @@
 {% load static %}
 
 {% block content %}
-<div class="header-style bg-color-primary txt-color">
-  <p>
+
+
+<div >
+  <p class="header-paragraph bg-color-primary txt-color">
     The Coronavirus Forum, an inclusive engagement platform to pool & share information, tips and advice, create opinion
     polls, interact and find support and official NHS resources and information.
   </p>
@@ -20,15 +22,15 @@
   </ul>
 
   <!-- The slideshow -->
-  <div class="carousel-inner">
+  <div class="carousel-inner text-center">
     <div class="carousel-item active">
-      <img src="{% static 'images/carousel_1.jpg' %}" alt="carousel image 1" width="550" height="250">
+      <img src="{% static 'images/carousel_1.jpg' %}" alt="carousel image 1">
     </div>
     <div class="carousel-item">
-      <img src="{% static 'images/carousel_2.jpg' %}" alt="carousel image 2" width="550" height="250">
+      <img src="{% static 'images/carousel_2.jpg' %}" alt="carousel image 2">
     </div>
     <div class="carousel-item">
-      <img src="{% static 'images/carousel_3.jpg' %}" alt="carousel image 3" width="550" height="250">
+      <img src="{% static 'images/carousel_3.jpg' %}" alt="carousel image 3">
     </div>
   </div>
 
@@ -47,11 +49,11 @@
 
 </div>
 <div class="container">
-  <h1 class="header-style bg-color-primary txt-color ">Latest posts</h1>
+  <h1 class="header-style bg-color-primary txt-color">Latest posts</h1>
   {% for post in latest_posts %}
-  <div class="card mb-1">
+  <div class="card mb-2">
     <div class="card-body">
-      <a href="{% url 'postdetail' post.pk %}">
+      <a href="{% url 'postdetail' post.pk %}" class="card-links">
       <h4 class="card-title">{{ post.title }}</h4>
       </a>
       <hr>

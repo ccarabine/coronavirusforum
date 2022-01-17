@@ -28,8 +28,8 @@ class Post(models.Model):
         max_length=200,
         unique=True
         )
-    excerpt = models.TextField(
-        verbose_name=("excerpt"),
+    body = models.TextField(
+        verbose_name=("body"),
         blank=True
         )
     user_name = models.CharField(
@@ -62,6 +62,10 @@ class Post(models.Model):
         blank=True,
         upload_to=""
         )
+    enable_voting = models.BooleanField(
+         verbose_name=("enable_voting"),
+         default=False
+        )
     upvote = models.IntegerField(
         verbose_name=("upvote"),
         default="0"
@@ -76,6 +80,7 @@ class Post(models.Model):
         default=None,
         blank=True
         )
+
 
     class Meta:
         verbose_name = "Post"

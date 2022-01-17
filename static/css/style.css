@@ -13,21 +13,30 @@
   --color-text-button: #000000;
   --color-background-primary: #367588;
   --color-background-secondary: #FF6F59;
+  --color-background-link: #F02200;
   --color-background-tertiary: #11262C;
   --color-background-button: #697d96;
 }
 
-.bg-color-primary{
-  background-color:var(--color-background-primary)
+.bg-color-primary {
+  background-color: var(--color-background-primary)
 }
-.bg-color-white{
-  background-color:white;
+
+.bg-color-white {
+  background-color: white;
 }
-.txt-color{
+
+.txt-color {
   color: var(--color-text);
 }
-.txt-color-secondary{
+
+.txt-color-secondary {
   color: var(--color-text-secondary);
+}
+
+.background-color-secondary {
+  background-color: var(--color-background-secondary);
+  color: var(--color-text);
 }
 
 .mar-right {
@@ -43,10 +52,43 @@
 .navbar .navbar-toggler {
   border: 0;
 }
+
 /* --- Header styling --- */
 .header-style {
   border-style: double;
   padding: 10px;
+
+}
+
+.header-paragraph {
+  border-style: double;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.1em;
+  padding-right: 40px;
+  padding-left: 40px;
+  margin-right: 80px;
+  margin-left: 80px;
+  font-weight: bold;
+}
+
+/* --- Post link styling --- */
+/* visited link */
+.card-links {
+  color: var(--color-text);
+}
+
+a.card-links:visited {
+  color: var(--color-text);
+}
+a.card-links:hover {
+  text-decoration: underline;
+  color: var(--color-text);
+  
+}
+.card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
 }
 
 /* --- Footer styling --- */
@@ -60,7 +102,7 @@
 }
 
 .ft-links a:hover {
-  color: var(--color-background-secondary)
+  text-decoration: underline;
 }
 
 .ft-links a:active {
@@ -78,41 +120,148 @@
 
 a:link {
   text-decoration: none;
-  
+
 }
 
- /* Make the image fully responsive */
- .carousel-inner img {
-  width: 100%;
-  height: 100%;
+/* Make the image fully responsive */
+.carousel-inner img {
+  width: 550px;
+  height: 250px;
 }
 
 /* --- Post card styling --- */
-.card{
+.card {
   background-color: var(--color-background-secondary);
   color: var(--color-text);
 }
 
 /* --- Pagination --- */
-.pagination{
-  margin-top:5px;
+.pagination {
+  margin-top: 5px;
   font-size: 1em;
- 
+
 }
 
 .page-link {
   color: var(--color-background-tertiary);
 }
+
 .page-item.active .page-link {
   background-color: var(--color-background-primary);
   color: var(--color-text);
 }
 
-.post-border{
+.post-border {
   border-style: solid;
   padding: 3px;
 }
+
 a {
   color: var(--color-text);
 }
 
+/* --- From styling --- */
+.asteriskField {
+  display: none;
+}
+
+.checkbox-lg {
+
+  padding-top: 5px;
+  font-size: 1.2em;
+}
+
+/* --- Socail media styling --- */
+/* Code used from  https://codepen.io/ephs23/pen/NeQZGx */
+footer ul {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+ 
+}
+
+footer ul li {
+  list-style: none;
+
+}
+
+footer ul li a {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 35px;
+  font-size: 17.5px;
+  margin: 0 10px;
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #fff;
+  z-index: 1;
+ 
+}
+
+
+footer ul li a .icon {
+  position: relative;
+  color: #262626;
+  transition: .5s;
+  z-index: 3;
+  
+}
+
+footer ul li a:hover .icon {
+  color: #fff;
+  transform: rotateY(360deg);
+}
+
+footer ul li a:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f00;
+  transition: .5s;
+  z-index: 2;
+  
+}
+
+footer ul li a:hover:before {
+  top: 0;
+}
+
+footer ul li:nth-child(1) a:before{
+  background: #3b5999;
+}
+
+footer ul li:nth-child(2) a:before{
+  background: #55acee;
+}
+
+footer ul li:nth-child(3) a:before {
+  background: #C13584;
+}
+
+
+
+@media screen and (max-width: 725px) {
+
+  .carousel-inner img {
+    width: 100%;
+    height: 100%;
+  }
+  .header-paragraph {
+
+    font-size: 1em;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+ 
+  }
+}

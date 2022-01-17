@@ -51,7 +51,34 @@ INSTALLED_APPS = [
     "forum",
     # Other
     "storages",
+    "crispy_forms",
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+        # As an example, using Summernote Air-mode
+        'airMode': False,
+
+        # Change editor size
+        'width': '100%',
+        'height': '280',
+
+        # Use proper language setting automatically (default)
+        'lang': None,
+
+        # Toolbar customization
+        # https://summernote.org/deep-dive/#custom-toolbar-popover
+        'toolbar': [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+        ],
+    },
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -88,8 +115,8 @@ TEMPLATES = [
 WSGI_APPLICATION = "coronavirus.wsgi.application"
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://8000-magenta-raven-g5b6gq55.ws-eu25.gitpod.io",
-]
+    "https://8000-magenta-raven-g5b6gq55.ws-eu27.gitpod.io",
+]    
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
