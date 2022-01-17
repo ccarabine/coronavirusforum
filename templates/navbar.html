@@ -7,8 +7,8 @@
     <div id="topnav" class="row pt-md-3 d-none d-md-flex ">
         <div class="col-12 col-md-3 my-auto py-1 py-lg-0 text-center text-lg-left">
             <a href="{% url 'home' %}">
-                <img src="{% static 'images/coronavirus_logo.jpg' %}" style="width:80px;"
-                    class="logo logo-font  my-0" alt="website logo">
+                <img src="{% static 'images/coronavirus_logo.jpg' %}" style="width:80px;" class="logo logo-font  my-0"
+                    alt="website logo">
             </a>
         </div>
 
@@ -31,22 +31,24 @@
         <div class="col-12 col-md-3 my-auto py-1 py-lg-0">
             <ul class="list-inline list-unstyled text-center text-lg-right my-0">
                 <li class="list-inline-item dropdown">
-                    <a class=" nav-color" href="#" id="user-options" data-bs-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a class=" nav-color" href="#" id="user-options" data-bs-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
                         <div class="text-center">
                             <div><i class="fas fa-user fa-lg nav-color"></i></div>
                             <p class="my-0 nav-color">My Account</p>
                         </div>
                     </a>
                     <div class="dropdown-menu border-0" aria-labelledby="user-options">
-               
+
 
                         <a href="#" class="dropdown-item">My Profile</a>
-                        <a href="#" class="dropdown-item">Logout</a>
-                
-                        <a href="#" class="dropdown-item">Register</a>
-                        <a href="#" class="dropdown-item">Login</a>
-                 
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                        {% else %}
+                        <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                        <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                        {% endif %}
+
                     </div>
                 </li>
             </ul>
@@ -64,7 +66,5 @@
         </nav>
     </div>
 
-   
+
 </header>
-
-
