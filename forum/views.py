@@ -1,7 +1,9 @@
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+
 from .models import Post, Topic
 from.forms import PostForm
 
@@ -64,6 +66,10 @@ class UpdatePostView(SuccessMessageMixin, UpdateView):
     form_class = PostForm
     template_name = 'updatepost.html'
     success_message = 'Post updated'
-    #fields = ('title', 'body', 'post_image',
-     #         'enable_voting')
 
+class DeletePostView(SuccessMessageMixin, DeleteView):
+    model = Post
+    
+    template_name = 'deletepost.html'
+    success_url = reverse_lazy('home')
+    success_message = 'Post deleted'
