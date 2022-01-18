@@ -5,14 +5,13 @@
 <div>
     
 </div>
-
-
+  
 <div class="container">
     <h4 class="header-style bg-color-primary txt-color"> Topic: {{ topic }}</h4>
 
     <div class="mb-2">
         {% if user.is_authenticated %}
-        <h6><a href="{% url 'addpost' topic %}" class="txt-color-secondary"> -> Start a new post within this topic</a></h6> 
+            <h6><a href="{% url 'addpost' topic %}" class="txt-color-secondary"> -> Start a new post within this topic</a></h6>            
         {% endif %}
         {% for post in post_list %}
         <div class="card card-post mb-2">

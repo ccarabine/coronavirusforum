@@ -4,31 +4,37 @@
 {% block title %} Edit post {% endblock %}
 {% block content %}
 
+
 <div class="container">
     <div class="row mx-auto justify-content-center">
         <div class="col-md-10 col-sm-12">
             <h4 class="header-style bg-color-primary txt-color"> Topic: {{ post.topic }}</h4>
             <div class="background-color-secondary mb-2 pl-2 pt-1 pb-1 justify-content-center">
+                {% if user.is_authenticated %}
+                {% if user.id == post.owner.id %}
                 <div class="col-12">
-                   
-                    <h4> Delete post    :    {{ post.title }}
-                      
+                    <h4> Delete post : {{ post.title }}
                     </h4>
-
                     <div class="form-group">
-
                         <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             <br>
                             <strong>Are you sure? </strong><br>
-                            
+
                             <button class="btn btn-danger">Delete Post! </button>
-                            
+
                         </form>
                         <br>
                         <button>
-                            <a href="{% url 'postdetail' post.id %}" class="btn btn-success">Do not delete Post!</a></button>
+                            <a href="{% url 'postdetail' post.id %}" class="btn btn-success">Do not delete
+                                Post!</a></button>
                     </div>
+                    {% else %}
+                    <h4>You can not delete this post</h4>
+                    {% endif %}
+                    {% else %}
+                    <h4>You are not logged in</h4>
+                    {% endif %}
                 </div>
             </div>
 
