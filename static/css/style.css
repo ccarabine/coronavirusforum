@@ -39,6 +39,11 @@
   color: var(--color-text);
 }
 
+.comments{
+  background-color:white;
+  color: var(--color-background-primary);
+}
+
 .mar-right {
   margin-right: 10px;
 }
@@ -86,7 +91,7 @@ a.card-links:hover {
   color: var(--color-text);
   
 }
-.card:hover {
+.card-post:hover {
   transform: scale(1.01);
   box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
 }
@@ -156,9 +161,7 @@ a:link {
   padding: 3px;
 }
 
-a {
-  color: var(--color-text);
-}
+
 
 /* --- From styling --- */
 .asteriskField {

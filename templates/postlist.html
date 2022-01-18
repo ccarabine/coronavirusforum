@@ -15,13 +15,13 @@
         <h6><a href="{% url 'addpost' topic %}" class="txt-color-secondary"> -> Start a new post within this topic</a></h6> 
         {% endif %}
         {% for post in post_list %}
-        <div class="card mb-2">
-            <a href="{{ post.get_absolute_url }}" class="card-links">
+        <div class="card card-post mb-2">
+            <a href="{{ post.get_absolute_url }}" class="card-links"> 
                 <div class="card-body">
-                    <a href="{% url 'postdetail' post.id %}">
+                    <a href="{% url 'postdetail' post.id %}" class="card-links">
                         <h4 class="card-title">{{ post.title }}</h4>
                         <hr>
-                        <h6> 22 Comments Created {{ post.created }}</h6>
+                        <h6> 22 Comments Created {{ post.created|timesince }}</h6>
                 </div>
             </a>
         </div>

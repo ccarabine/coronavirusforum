@@ -1,11 +1,12 @@
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import DeleteView, CreateView
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 
-from .models import Post, Topic
-from.forms import PostForm
+from .models import Post, Topic, Comment
+from.forms import PostForm, CommentForm
 
 
 class PostListHomeView(ListView):
@@ -61,15 +62,33 @@ def addPost(request, topic):
     context = {'form': form, 'topic': topic}
     return render(request, "postform.html", context)
 
+
 class UpdatePostView(SuccessMessageMixin, UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'updatepost.html'
     success_message = 'Post updated'
 
+
 class DeletePostView(SuccessMessageMixin, DeleteView):
     model = Post
-    
     template_name = 'deletepost.html'
     success_url = reverse_lazy('home')
     success_message = 'Post deleted'
+
+
+class AddCommentView(SuccessMessageMixin, CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'commentform.html'
+    success_message = 'Comment added'
+
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        form.instance.name = self.request.user.username
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs): # Get the post
+        post = get_object_or_404(Post, pk=self.kwargs['pk'])
+        kwargs['post'] = post
+        return super().get_context_data(**kwargs)

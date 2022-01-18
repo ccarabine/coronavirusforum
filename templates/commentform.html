@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} Comment on a post{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row mx-auto justify-content-center">
+        <div class="col-md-10 col-sm-12">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h4 class="card-title">{{ post }} </h4>
+                    <hr>
+                    <h6> 22 Comments Created {{ post.created|timesince }}</h6>
+                </div>
+                </a>
+            </div>
+            <div class="background-color-secondary mb-2 pl-2 pt-1 pb-1 justify-content-center">
+                <div class="col-12 mb-2">
+                    <h6> Add your comment here
+                        <a href="#" class="txt-color-secondary pl-5 "> Talk guidelines </a>
+                    </h6>
+                    <div class="form-group">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% crispy form %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}

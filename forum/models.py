@@ -3,10 +3,9 @@
 # 3rd party:
 from django.db import models
 from django.contrib.auth.models import User
-from django.shortcuts import reverse
+
 
 class Topic(models.Model):
-
     name = models.CharField(
         verbose_name=("name"),
         max_length=100
@@ -81,7 +80,6 @@ class Post(models.Model):
         blank=True
         )
 
-
     class Meta:
         verbose_name = "Post"
         verbose_name_plural = "Posts"
@@ -142,6 +140,10 @@ class Comment(models.Model):
         ordering = ["created"]
         verbose_name = "Comment"
         verbose_name_plural = "Comments"
+        ordering = ["-created"]
 
     def __str__(self):
         return f"Comment {self.comment_body} by {self.name}"
+
+    def get_absolute_url(self):
+        return f"/topic/{self.post_id}"

@@ -9,7 +9,7 @@
 
 <div class="container">
     <h4 class="header-style bg-color-primary txt-color"> Topic: {{ post.topic }}</h4>
-    <div class="background-color-secondary mb-2">
+    <div class="card background-color-secondary mb-2">
 
         <div class="card-body">
             {% if user.is_authenticated %}
@@ -19,19 +19,36 @@
             <h4 class="card-title">{{ post.title | safe }}</h4>
             <hr>
             <h4 class="card-title">{{ post.body | safe }}</h4>
-            <h6> 22 Comments Created {{ post.created }}</h6>
-
+            <h6> 22 Comments Created {{ post.created|timesince }}</h6>
             {% if post.post_image %}
             <a href="{% url 'postdetail' post.id %}">
                 <img src="{{ post.post_image.url }}" class="card-img-top" alt="{{ post.name }}">
             </a>
-
-
             {% endif %}
-
         </div>
-
     </div>
+    </br>
+
+
+    {% if not post.comment_post.all %}
+    No Comments Yet..<a href="#">Add one</a>
+    {% else %}
+    {% if user.is_authenticated %}
+    <a href="{% url 'addcomment' post.pk %}"> Add comment</a>
+    {% endif %}
+    {% for comment in post.comment_post.all %}
+    <h6 class="comments">
+        {{ comment.name }} Created: 
+        {{ comment.created|timesince }} ago
+    </h6>
+    <h6>
+        {{ comment.comment_body | safe}}
+    </h6>
+    <hr>
+
+    {% endfor %}
+    {% endif %}
+
 
 
 
