@@ -112,3 +112,7 @@ class AddCommentView(SuccessMessageMixin, CreateView):
         post = get_object_or_404(Post, pk=self.kwargs['pk'])
         kwargs['post'] = post
         return super().get_context_data(**kwargs)
+
+def email_success(request):
+    res = 'Email is verified!'
+    return HttpResponse('<p>%s</p>' % res)

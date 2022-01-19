@@ -13,4 +13,5 @@ urlpatterns = [
           name="deletepost"),
      path('topic/<int:pk>/comment/', views.AddCommentView.as_view(),
           name="addcomment"),
+     path('email_success/', views.email_success, name='email_success')
 ]
