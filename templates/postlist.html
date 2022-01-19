@@ -20,7 +20,8 @@
                     <a href="{% url 'postdetail' post.id %}" class="card-links">
                         <h4 class="card-title">{{ post.title }}</h4>
                         <hr>
-                        <h6> 22 Comments Created {{ post.created|timesince }}</h6>
+                        
+                        <h6>  Comment :{{ comments.count }}  Created {{ post.created|timesince }}</h6>
                 </div>
             </a>
         </div>
@@ -54,5 +55,5 @@
 </nav>
 
 {% endif %}
-</div>
+
 {%endblock%}

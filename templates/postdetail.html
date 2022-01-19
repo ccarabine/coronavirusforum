@@ -13,49 +13,79 @@
 
         <div class="card-body">
             {% if user.is_authenticated %}
-                {% if user.id == post.owner.id %}
-                    <a href="{% url 'updatepost' post.pk %}"> update</a>
-                    <a href="{% url 'deletepost' post.pk %}"> Delete</a>
-                {% endif %}
+            {% if user.id == post.owner.id %}
+            <a href="{% url 'updatepost' post.pk %}"> update</a>
+            <a href="{% url 'deletepost' post.pk %}"> Delete</a>
+            {% endif %}
             {% endif %}
             <h4 class="card-title">{{ post.title | safe }}</h4>
             <hr>
             <h4 class="card-title">{{ post.body | safe }}</h4>
-            <h6> 22 Comments Created {{ post.created|timesince }}</h6>
+            <h6> {{ comments.count }} Comment{{ comments|pluralize:"s" }}Created {{ post.created|timesince }}</h6>
+
             {% if post.post_image %}
             <a href="{% url 'postdetail' post.id %}">
                 <img src="{{ post.post_image.url }}" class="card-img-top" alt="{{ post.name }}">
             </a>
+
+
             {% endif %}
         </div>
     </div>
     </br>
 
+    <div>
+        {% if not post.comment_post.all %}
+        No Comments Yet..{% if user.is_authenticated %}<a href="{% url 'addcomment' post.pk %}">Add one</a>{% endif %}
+        {% else %}
+        {% if user.is_authenticated %}
+        <a href="{% url 'addcomment' post.pk %}"> Add comment</a>
+        {% endif %}
+        {% for comment in page_obj %}
 
-    {% if not post.comment_post.all %}
-    No Comments Yet..<a href="#">Add one</a>
-    {% else %}
-    {% if user.is_authenticated %}
-    <a href="{% url 'addcomment' post.pk %}"> Add comment</a>
-    {% endif %}
-    {% for comment in post.comment_post.all %}
-    <h6 class="comments">
-        {{ comment.name }} Created:
-        {{ comment.created|timesince }} ago
-    </h6>
-    <h6>
-        {{ comment.comment_body | safe}}
+        <h6 class="comments">
+            {{ comment.name }} Created:
+            {{ comment.created|timesince }} ago
+        </h6>
+        <h6>
+            {{ comment.comment_body | safe}}
+            
+            
+    </div>
     </h6>
     <hr>
 
     {% endfor %}
     {% endif %}
-
-
-
-
-
 </div>
+</div>
+{% if paginator %}
+<nav class="pagination justify-content-center mb-2" aria-label="Page navigation">
+    <ul class="pagination"></ul>
+    {% if page_obj.has_previous %}
+    <li class="page-item "><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+    {% endif %}
 
+    {% for i in paginator.page_range %}
+    {% if page_obj.number == i %}
+    <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
+    </li>
+    {% else %}
+    <li class="page-item "><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
 
+    {% endfor %}
+    </ul>
+
+    {% if page_obj.has_next %}
+    <li class="page-item "><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a> </li>
+    {% else %}
+    <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+    {% endif %}
+</nav>
+
+{% endif %}
 {%endblock%}

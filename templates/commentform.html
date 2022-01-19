@@ -12,6 +12,9 @@
                     <h4 class="card-title">{{ post }} </h4>
                     <hr>
                     <h6> 22 Comments Created {{ post.created|timesince }}</h6>
+                    Comment{{ comments.count|pluralize }}
+      <span class="badge badge-dark ml-2">{{ comments.count }}</span>
+    </div>
                 </div>
                 </a>
             </div>

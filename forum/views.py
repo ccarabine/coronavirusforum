@@ -3,6 +3,7 @@ from django.views.generic import DeleteView, CreateView
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 
 from .models import Post, Topic, Comment
@@ -17,6 +18,7 @@ class PostListHomeView(ListView):
 
 
 class PostListView(ListView):
+    
     template_name = 'postlist.html'
     context_object_name = 'post_list'
     paginate_by = 5
@@ -43,6 +45,24 @@ class PostDetailView(DetailView):
     model = Post
     template_name = "postdetail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(PostDetailView, self).get_context_data(**kwargs)
+        page = self.request.GET.get('page')
+        paginator = Paginator(self.object.comment_post.all(), 5)
+        context['page'] = page
+        context['paginator'] = paginator
+        context['object_list'] = context['paginator'].get_page(context['page'])
+        context['page_obj'] = paginator.get_page(page)
+        
+        pk = self.kwargs["pk"]
+        form = CommentForm()
+        post = get_object_or_404(Post, pk=pk)
+        comments = self.object.comment_post.all()
+
+        context['post'] = post
+        context['comments'] = comments
+        context['form'] = form
+        return context
 
 def addPost(request, topic):
     form = PostForm()
@@ -88,7 +108,7 @@ class AddCommentView(SuccessMessageMixin, CreateView):
         form.instance.name = self.request.user.username
         return super().form_valid(form)
 
-    def get_context_data(self, **kwargs): # Get the post
+    def get_context_data(self, **kwargs):  # Get the post
         post = get_object_or_404(Post, pk=self.kwargs['pk'])
         kwargs['post'] = post
         return super().get_context_data(**kwargs)
