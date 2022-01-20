@@ -12,7 +12,7 @@ from django.conf import settings
 def createUser(sender, instance, created, **kwargs):
     if created:
         user1 = instance
-        print(user1)
+        print(user1.email)
         subject = 'Welcome to CoronaVirus Forum'
         message = 'We are glad you are here!'
 
@@ -20,7 +20,7 @@ def createUser(sender, instance, created, **kwargs):
             subject,
             message,
             settings.EMAIL_HOST_USER,
-            [user1],
+            [user1.email],
             fail_silently=False,
         )
 
