@@ -6,20 +6,28 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('forum', '0001_initial'),
+        ("forum", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='comment',
-            options={'ordering': ['created'], 'verbose_name': 'Comment', 'verbose_name_plural': 'Comments'},
+            name="comment",
+            options={
+                "ordering": ["created"],
+                "verbose_name": "Comment",
+                "verbose_name_plural": "Comments",
+            },
         ),
         migrations.AlterModelOptions(
-            name='post',
-            options={'ordering': ['-created'], 'verbose_name': 'Post', 'verbose_name_plural': 'Posts'},
+            name="post",
+            options={
+                "ordering": ["-created"],
+                "verbose_name": "Post",
+                "verbose_name_plural": "Posts",
+            },
         ),
         migrations.AlterModelOptions(
-            name='vote',
-            options={'verbose_name': 'Vote', 'verbose_name_plural': 'Votes'},
+            name="vote",
+            options={"verbose_name": "Vote", "verbose_name_plural": "Votes"},
         ),
     ]

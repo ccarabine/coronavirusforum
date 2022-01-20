@@ -8,12 +8,14 @@ from . import models
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
 
-    prepopulated_fields = {"slug": ("title",),}
+    prepopulated_fields = {
+        "slug": ("title",),
+    }
     list_display = ("title", "topic", "owner", "created")
     search_fields = ("title", "content")
     summernote_fields = ("excerpt",)
 
-    
+
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ("name", "comment_body", "post", "created")

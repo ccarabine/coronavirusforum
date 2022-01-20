@@ -1,6 +1,7 @@
+const messages = document.getElementById('msg');
+const alert = new bootstrap.Alert(messages);
 
- setTimeout(function () {
-    let messages = document.getElementById('msg');
-    let alert = new bootstrap.Alert(messages);
-    alert.close();
+if (messages)
+setTimeout(function () {
+  alert.close();
 }, 2500);

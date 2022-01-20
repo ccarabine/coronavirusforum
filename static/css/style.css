@@ -250,7 +250,69 @@ footer ul li:nth-child(3) a:before {
   background: #C13584;
 }
 
+/* --- Google button --- */
+.btn-google {
+  
+  box-shadow: 0 1px 2px 1px #ddd;
+  border-radius: 2px;
+  font-size: 15px;
+  
+  cursor: pointer
+}
 
+.btn-facebook {
+  color: white;
+  background-color: #3b5998;
+  border-color: rgba(0,0,0,0.2);
+}
+.btn-social {
+  position: relative;
+  padding-left: 44px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-social:hover {
+  color: #eee;
+}
+.btn-social :first-child {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  padding: 7px;
+  font-size: 1.6em;
+  text-align: center;
+  border-right: 1px solid rgba(0,0,0,0.2)
+}
+
+.login-form {
+  width: 425px;
+  margin: 30px auto;
+}
+.form-border {        
+  margin-bottom: 15px;
+  background: #f7f7f7;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  }
+.login-form h2 {
+      margin: 0 0 15px;
+}
+.or-seperator {
+  margin-top: 20px;
+  text-align: center;
+  border-top: 1px solid #ccc;
+}
+.or-seperator i {
+    padding: 0 10px;
+    background: #f7f7f7;
+    position: relative;
+    top: -11px;
+    z-index: 1;
+}   
 
 @media screen and (max-width: 725px) {
 
