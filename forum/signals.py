@@ -19,8 +19,8 @@ def createUser(sender, instance, created, **kwargs):
         send_mail(
             subject,
             message,
-            'projectckcabs@gmail.com',
-            ['ccarabine12@gmail.com'],
+            settings.EMAIL_HOST_USER,
+            [user1],
             fail_silently=False,
         )
 
