@@ -51,3 +51,4 @@ class CommentForm(forms.ModelForm):
             Field("comment_body"),
             Submit("submit", "Add Comment", css_class="btn btn-secondary"),
         )
+

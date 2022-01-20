@@ -147,14 +147,6 @@ LOGOUT_REDIRECT_URL = "/"
 
 SITE_ID = 1
 
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "projectckcabs@gmail.com"
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_APP_PASSWORD")
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-DEFAULT_FROM_EMAIL = "Corona Virus Forum team <noreply@coronaforum.com>"
 
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/"  # if you are not logged in
 
@@ -162,6 +154,19 @@ ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/"  # if you are logged
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 UNIQUE_EMAIL = True
 SOCIALACCOUNT_QUERY_EMAIL = True
+
+# Email Settings
+if 'DEVELOPMENT' in os.environ:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    DEFAULT_FROM_EMAIL = "Corona Virus Forum team <noreply@coronaforum.com>"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER_CK")
+    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD_CK")
+    DEFAULT_FROM_EMAIL = os.environ.get("EMAIL_HOST_USER_CK")
 
 MESSAGE_TAGS = {
     messages.DEBUG: "alert-info",

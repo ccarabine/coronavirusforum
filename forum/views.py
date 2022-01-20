@@ -4,6 +4,7 @@ from django.template.defaultfilters import slugify
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
+from django.core.mail import send_mail 
 from django.urls import reverse_lazy
 
 from .models import Post, Topic, Comment

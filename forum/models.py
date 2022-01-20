@@ -3,7 +3,15 @@
 # 3rd party:
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 
+from django.conf import settings
+
+# singals imports
+
+from django.dispatch import receiver
+from django.db.models.signals import pre_save, post_save
+from allauth.account.signals import user_signed_up
 
 class Topic(models.Model):
     name = models.CharField(verbose_name=("name"), max_length=100)
@@ -15,19 +23,22 @@ class Topic(models.Model):
 class Post(models.Model):
 
     topic = models.ForeignKey(Topic, on_delete=models.PROTECT, default=1)
-    title = models.CharField(verbose_name=("title"), max_length=200, unique=True)
+    title = models.CharField(verbose_name=(
+        "title"), max_length=200, unique=True)
     body = models.TextField(verbose_name=("body"), blank=True)
     user_name = models.CharField(
         verbose_name=("user_name"), max_length=200, blank=True, null=True
     )
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="post_owner")
+    owner = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="post_owner")
     slug = models.SlugField(verbose_name=("slug"), max_length=150, unique=True)
     updated = models.DateTimeField(verbose_name=("updated"), auto_now=True)
     created = models.DateTimeField(verbose_name=("created"), auto_now_add=True)
     post_image = models.ImageField(
         verbose_name=("post_image"), null=True, blank=True, upload_to=""
     )
-    enable_voting = models.BooleanField(verbose_name=("enable_voting"), default=False)
+    enable_voting = models.BooleanField(
+        verbose_name=("enable_voting"), default=False)
     upvote = models.IntegerField(verbose_name=("upvote"), default="0")
     downvote = models.IntegerField(verbose_name=("downvote"), default="0")
     votes = models.ManyToManyField(
@@ -90,3 +101,21 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         return f"/topic/{self.post_id}"
+
+
+# signals
+User = settings.AUTH_USER_MODEL
+
+
+
+
+#@receiver(pre_save, sender=User)
+#def send_mail(sender, instance, *args, **kwargs):
+   # if created:
+  #      print("send email to", User)
+ #       subject = 'Thank you for registering with us'
+   #     send_mail(subject, 'Body', 'sender@gmail.com',
+    #              ['reciever@gmail.com'], fail_silently=False,)
+  #  else:
+  #      print(instance.username, "was saved")
+  
