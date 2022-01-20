@@ -3,15 +3,7 @@
 # 3rd party:
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.mail import send_mail
 
-from django.conf import settings
-
-# singals imports
-
-from django.dispatch import receiver
-from django.db.models.signals import pre_save, post_save
-from allauth.account.signals import user_signed_up
 
 class Topic(models.Model):
     name = models.CharField(verbose_name=("name"), max_length=100)
@@ -101,21 +93,3 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         return f"/topic/{self.post_id}"
-
-
-# signals
-User = settings.AUTH_USER_MODEL
-
-
-
-
-#@receiver(pre_save, sender=User)
-#def send_mail(sender, instance, *args, **kwargs):
-   # if created:
-  #      print("send email to", User)
- #       subject = 'Thank you for registering with us'
-   #     send_mail(subject, 'Body', 'sender@gmail.com',
-    #              ['reciever@gmail.com'], fail_silently=False,)
-  #  else:
-  #      print(instance.username, "was saved")
-  

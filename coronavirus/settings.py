@@ -120,7 +120,7 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
-                "django.template.context_processors.request",  # required by allauth
+                "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "forum.views.topic_list",
@@ -135,6 +135,7 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
+# Email Settings
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
@@ -147,15 +148,6 @@ LOGOUT_REDIRECT_URL = "/"
 
 SITE_ID = 1
 
-
-ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/"  # if you are not logged in
-
-ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/"  # if you are logged in
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
-UNIQUE_EMAIL = True
-SOCIALACCOUNT_QUERY_EMAIL = True
-
-# Email Settings
 if 'DEVELOPMENT' in os.environ:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     DEFAULT_FROM_EMAIL = "Corona Virus Forum team <noreply@coronaforum.com>"
@@ -167,6 +159,13 @@ else:
     EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER_CK")
     EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD_CK")
     DEFAULT_FROM_EMAIL = os.environ.get("EMAIL_HOST_USER_CK")
+
+
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/"
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/"
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
+UNIQUE_EMAIL = True
+SOCIALACCOUNT_QUERY_EMAIL = True
 
 MESSAGE_TAGS = {
     messages.DEBUG: "alert-info",
@@ -187,7 +186,8 @@ CSRF_TRUSTED_ORIGINS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 if "DATABASE_URL" in os.environ:
-    DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+    DATABASES = {"default": dj_database_url.parse(
+        os.environ.get("DATABASE_URL"))}
 else:
     print("Postgres URL not found, using sqlite instead")
     DATABASES = {
@@ -206,13 +206,16 @@ AUTH_PASSWORD_VALIDATORS = [
         "UserAttributeSimilarityValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation." "MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation."
+        "MinimumLengthValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation." "CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation."
+        "CommonPasswordValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation." "NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation."
+        "NumericPasswordValidator",
     },
 ]
 
