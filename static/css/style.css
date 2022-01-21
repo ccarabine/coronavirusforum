@@ -313,7 +313,13 @@ footer ul li:nth-child(3) a:before {
     top: -11px;
     z-index: 1;
 }   
+/*
 
+.thumb {
+  color:white;
+
+  fill: white;
+}*/
 @media screen and (max-width: 725px) {
 
   .carousel-inner img {
