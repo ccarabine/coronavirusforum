@@ -6,6 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
+from django.db.models import F, Q
 
 from .models import Post, Topic, Comment, Vote
 from .forms import PostForm, CommentForm
@@ -59,19 +60,18 @@ class PostDetailView(DetailView):
         form = CommentForm()
         post = get_object_or_404(Post, pk=pk)
         comments = self.object.comment_post.all()
-        
+
         # need to pass into the total votes
-        #stuff = get_object_or_404(Post, id=self.kwargs['pk'])
+        # stuff = get_object_or_404(Post, id=self.kwargs['pk'])
         total_votes = post.total_votes()
-        
-        
+
         liked = False
         if post.votes.filter(id=self.request.user.id).exists():
             liked = True
-        
+
         context["total_votes"] = total_votes
         context["liked"] = liked
-        
+
         context["post"] = post
         context["comments"] = comments
         context["form"] = form
@@ -133,17 +133,115 @@ def email_success(request):
     return HttpResponse("<p>%s</p>" % res)
 
 
-def UpVoteView(request, pk):
-    post = get_object_or_404(Post, id=request.POST.get('post_id')) #get the post id from the form submit
-    liked = False
-    if post.votes.filter(id=request.user.id).exists():
-        post.votes.remove(request.user)
-        liked=False
-    else:
-  
-        post.votes.add(request.user)
-    
-        liked=True
-    return HttpResponseRedirect(reverse('postdetail', args=[str(pk)]))
+def VoteView(request, pk):
+    # get the post id from the form submit
+    post = get_object_or_404(Post, pk=pk)
+    id = post.id
+    update = Post.objects.get(id=id)
+    voteUser = request.user
+    upVote = request.POST.get('upVote')
+    downVote = request.POST.get('downVote')
+    #print(update)
+    #print(post)
+    #print(voteUser)
+    #print(upVote)
+    #print(downVote)
+    #print(request.user.id)
+    # icheck if there is  user in the post model votes
+    if update.votes.filter(id=request.user.id).exists():
+        # Get the users current vote (True/False) & query
+        print('here')
+        q = Vote.objects.get(
+        Q(post_id=id) & Q(user_id=request.user.id))
+        #print(q)
+        existing_vote = q.vote
+        print(existing_vote)
+        print("exisiting user")
 
-   
+        if existing_vote == True:
+            print("exisiting user true")
+                # Now we need action based upon what button pressed
+            if upVote == 'on':
+
+                update.upvote = F('upvote') - 1
+                update.votes.remove(request.user)
+                update.save()
+                update.refresh_from_db()
+                up = update.upvote
+                down = update.downvote
+                q.delete()
+
+            if downVote == 'on':
+                # Change vote in Post
+                print("here down 2")
+                update.upvote = F('upvote') - 1
+                update.downvote = F('downvote') + 1
+                update.save()
+
+                # update vote
+                q.vote = False
+                q.save(update_fields=['vote'])
+
+                # Return updated votes
+                update.refresh_from_db()
+                up = update.upvote
+                down = update.downvote
+
+        elif existing_vote == False:
+            print("exisiting user false")
+            if upVote == 'on':
+                # Change vote in Post
+                update.upvote = F('upvote') + 1
+                update.downvote = F('downvote') - 1
+                update.save()
+
+                # Update Vote
+
+                q.vote = True
+                q.save(update_fields=['vote'])
+
+                # Return updated votes
+                update.refresh_from_db()
+                up = update.upvote
+                down = update.downvote
+
+            if downVote == 'on':
+
+
+                print("down here 210")
+                update.downvote = F('downvote') - 1
+                update.votes.remove(request.user)
+                update.save()
+                update.refresh_from_db()
+                up = update.upvote
+                down = update.downvote
+                q.delete()
+                
+    else:
+        print("new selection")
+        if upVote == 'on':
+            print('we have an up vote')
+            update.upvote = F('upvote') + 1
+            update.votes.add(request.user)
+            update.save()
+
+            # Add new vote
+            new = Vote(post_id=id, user_id=request.user.id, vote=True)
+            new.save()
+        else:
+            print("down-new Add vote down")
+            update.downvote = F('downvote') + 1
+            update.votes.add(request.user)
+            update.save()
+            # Add new vote
+            new = Vote(post_id=id, user_id=request.user.id, vote=False)
+            new.save()
+
+    # Return updated votes
+    update.refresh_from_db()
+    up = update.upvote
+    down = update.downvote
+
+     
+    print ("there")
+    return HttpResponseRedirect(reverse('postdetail', args=[str(pk)]))
