@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment
+from .models import Post, Comment, Vote
 from django_summernote.admin import SummernoteModelAdmin
 
 from . import models
@@ -23,3 +23,8 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Topic)
+
+@admin.register(Vote)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ("post", "user", "vote")
+    search_fields = ("post", "user")

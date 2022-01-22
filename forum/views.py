@@ -5,9 +5,9 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
-from .models import Post, Topic, Comment
+from .models import Post, Topic, Comment, Vote
 from .forms import PostForm, CommentForm
 
 
@@ -59,7 +59,19 @@ class PostDetailView(DetailView):
         form = CommentForm()
         post = get_object_or_404(Post, pk=pk)
         comments = self.object.comment_post.all()
-
+        
+        # need to pass into the total votes
+        #stuff = get_object_or_404(Post, id=self.kwargs['pk'])
+        total_votes = post.total_votes()
+        
+        
+        liked = False
+        if post.votes.filter(id=self.request.user.id).exists():
+            liked = True
+        
+        context["total_votes"] = total_votes
+        context["liked"] = liked
+        
         context["post"] = post
         context["comments"] = comments
         context["form"] = form
@@ -119,3 +131,19 @@ class AddCommentView(SuccessMessageMixin, CreateView):
 def email_success(request):
     res = "Email is verified!"
     return HttpResponse("<p>%s</p>" % res)
+
+
+def UpVoteView(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post_id')) #get the post id from the form submit
+    liked = False
+    if post.votes.filter(id=request.user.id).exists():
+        post.votes.remove(request.user)
+        liked=False
+    else:
+  
+        post.votes.add(request.user)
+    
+        liked=True
+    return HttpResponseRedirect(reverse('postdetail', args=[str(pk)]))
+
+   

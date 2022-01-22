@@ -47,6 +47,9 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return f"/topic/{self.pk}"
+    
+    def total_votes(self):
+        return self.votes.count()
 
 
 class Vote(models.Model):
