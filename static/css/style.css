@@ -313,10 +313,22 @@ footer ul li:nth-child(3) a:before {
     top: -11px;
     z-index: 1;
 }   
-/*
-/* --- voting button --- */
+
+/* --- voting thumbs --- */
 .hide {
   display:none;
+}
+
+.active{
+color: var(--color-background-primary)
+}
+
+.not-active{
+  color:white
+  }
+
+.cursor{
+  cursor: pointer;
 }
 
 @media screen and (max-width: 725px) {

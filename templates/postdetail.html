@@ -18,38 +18,43 @@
             <h4 class="card-title">{{ post.title | safe }}</h4>
             <hr>
             <h4 class="card-title">{{ post.body | safe }}</h4>
+            {% if user.is_authenticated %}
             <h6>
-
-                <span id="thumbs" data-value="{{post.id}}">
-                </span><form action="{% url 'vote' post.pk %}" method="POST" id="voteForm">
+                <form action="{% url 'vote' post.pk %}" method="POST" id="voteForm">
                     {% csrf_token %}
-                    {% if user.is_authenticated %}
-                    <div class="flex-row">
-                        <span"><span id="up">{{post.upvote}}</span>
-                        <i class="fas fa-thumbs-up" id="upThumb"></i>
+                    
+                    <span>{{post.upvote}}</span>
+                        <i class="fas fa-thumbs-up mr-2 cursor
+                        {% if voted and upvoted %}
+                            active
+                        {% else %}
+                            not-active
+                        {% endif %}" id="upThumb"></i>
                         <input type="checkbox" class="hide" name="upVote" id="upVote" unchecked>
-                        <span"><span id="up">{{post.downvote}}</span>
-                        <i class="fas fa-thumbs-down" id="downThumb"></i>
+
+                        <span>{{post.downvote}}</span>
+                            <i class="fas fa-thumbs-down mr-3 cursor
+                            {% if voted and not upvoted %}
+                                active
+                            {% else %}
+                               not-active
+                            {% endif %}" id="downThumb"></i>
                         <input type="checkbox" class="hide" name="downVote" id="downVote" unchecked>
-                        <Button type="submit" class="hide" style="width:100px"></Button>
-
-                    </div>
-
-
-                    {% endif %}
+                        <Button type="submit" class="hide" style="width:100px"></Button> 
+                        <span>Created {{ post.created|timesince }}</span>       
                 </form>
-
-                Created {{ post.created|timesince }}
-
-
+            {% else %}
+                <span>{{post.upvote}}<i class="fas fa-thumbs-up mr-2 ml-1 "></i></span>
+                <span>{{post.downvote}}<i class="fas fa-thumbs-down mr-3 ml-1"></i></span>
+                <span>Created {{ post.created|timesince }}</span> 
+            {% endif %}
+            
             </h6>
 
             {% if post.post_image %}
             <a href="{% url 'postdetail' post.id %}">
                 <img src="{{ post.post_image.url }}" class="card-img-top" alt="{{ post.name }}">
             </a>
-
-
             {% endif %}
         </div>
     </div>
