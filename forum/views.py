@@ -7,7 +7,6 @@ from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import F, Q
-from django.core import serializers
 from .models import Post, Topic, Comment, Vote
 from .forms import PostForm, CommentForm
 
@@ -48,37 +47,32 @@ class PostDetailView(DetailView):
     template_name = "postdetail.html"
 
     def get_context_data(self, **kwargs):
+        # Comment pagination section
         context = super(PostDetailView, self).get_context_data(**kwargs)
         page = self.request.GET.get("page")
         paginator = Paginator(self.object.comment_post.all(), 5)
-        context["page"] = page
-        context["paginator"] = paginator
-        context["object_list"] = context["paginator"].get_page(context["page"])
-        context["page_obj"] = paginator.get_page(page)
-
         pk = self.kwargs["pk"]
         form = CommentForm()
         post = get_object_or_404(Post, pk=pk)
         comments = self.object.comment_post.all()
 
-        # need to pass into the total votes
-        # stuff = get_object_or_404(Post, id=self.kwargs['pk'])
-        total_votes = post.total_votes()
-        
+        # Votes section
         voted = False
         upvoted = None
-        
         if self.request.user in post.votes.all():
             voted = True
             upvoted = Vote.objects.get(post=post, user=self.request.user).vote
 
-        context["total_votes"] = total_votes
-        context["voted"] = voted
-        context["upvoted"] = upvoted
-
+        context["page"] = page
+        context["paginator"] = paginator
+        context["object_list"] = context["paginator"].get_page(context["page"])
+        context["page_obj"] = paginator.get_page(page)
         context["post"] = post
         context["comments"] = comments
         context["form"] = form
+
+        context["voted"] = voted
+        context["upvoted"] = upvoted
         return context
 
 
@@ -140,83 +134,62 @@ def email_success(request):
 def VoteView(request, pk):
     # get the post id from the form submit
     post = get_object_or_404(Post, pk=pk)
-    
     id = post.id
     update = Post.objects.get(id=id)
-    voteUser = request.user
+
+    # get the check box value either on or none
     upVote = request.POST.get('upVote')
     downVote = request.POST.get('downVote')
-   
-    # icheck if there is  user in the post model votes
-    if update.votes.filter(id=request.user.id).exists():
-        # Get the users current vote (True/False) & query
-        print('START HERE')
-        
-        q = Vote.objects.get(
-        Q(post_id=id) & Q(user_id=request.user.id))
-        existing_vote = q.vote  # true or false
 
-        if existing_vote == True:
-            print(f'{existing_vote} existing user has voted')
-                
-            print(f'{upVote} upvote {downVote} downvote')
+    # check if the user exists in the post model votes true or false
+    if update.votes.filter(id=request.user.id).exists():
+
+        # Query to get the vote - True or false
+        q = Vote.objects.get(Q(post_id=id) & Q(user_id=request.user.id))
+        existing_vote = q.vote
+
+        # user has voted
+        if existing_vote:
+            # Existing user has an upvote, deselected upvote
+            # user has not voted
             if upVote == 'on':
-                print("exsiting user has voted, deslected upvote")
                 update.upvote = F('upvote') - 1
                 update.votes.remove(request.user)
                 update.save()
                 update.refresh_from_db()
-                print(f'{upVote} upvote {downVote} downvote')
                 q.delete()
 
+            # Existing user has an upvote, selected downvote
             if downVote == 'on':
-                # Change vote in Post
-                print("exsiting user has voted, deselected upvote?now clicked on downvote -checked box on")
                 update.upvote = F('upvote') - 1
                 update.downvote = F('downvote') + 1
                 update.save()
-
-                # update vote
                 q.vote = False
                 q.save(update_fields=['vote'])
-
-                # Return updated votes
                 update.refresh_from_db()
-                print(f'{upVote} upvote {downVote} downvote')
-
-        elif existing_vote == False:
-            print("exisiting vote false")
+        else:
+            # existing user has an downvote, selected upvote
             if upVote == 'on':
-                # Change vote in Post
-                print("we have an upvote - on")
                 update.upvote = F('upvote') + 1
                 update.downvote = F('downvote') - 1
                 update.save()
 
                 # Update Vote
-
                 q.vote = True
                 q.save(update_fields=['vote'])
-
-                # Return updated votes
                 update.refresh_from_db()
-                print(f'{upVote} upvote {downVote} downvote')
+
+            # User has an exisiting downvote, De-selected downvote
+            # User has not voted
             if downVote == 'on':
-
-
-                print("we have an downvote - on")
                 update.downvote = F('downvote') - 1
                 update.votes.remove(request.user)
                 update.save()
                 update.refresh_from_db()
                 q.delete()
-                print(f'{upVote} upvote {downVote} downvote')
-                
     else:
-        
+        # user has not voted - new vote - selected upvote
         if upVote == 'on':
-            print("new selection - user pressed upvote")
-            
             update.upvote = F('upvote') + 1
             update.votes.add(request.user)
             update.save()
@@ -224,26 +197,16 @@ def VoteView(request, pk):
             # Add new vote
             new = Vote(post_id=id, user_id=request.user.id, vote=True)
             new.save()
-            print(f'{upVote} upvote {downVote} downvote')
         else:
-            print("new selection - user pressed downvote")
-            
+            # user has not voted - new vote - selected downvote
             update.downvote = F('downvote') + 1
             update.votes.add(request.user)
             update.save()
+
             # Add new vote
             new = Vote(post_id=id, user_id=request.user.id, vote=False)
             new.save()
-            print(f'{upVote} upvote {downVote} downvote')
-   
 
     # Return updated votes
-    up_vote=post.upvote
-    print(up_vote)
     update.refresh_from_db()
-
-    request.session['upVote'] = upVote
-    request.session['downVote'] = downVote
-    print("END")
     return HttpResponseRedirect(reverse('postdetail', args=[str(pk)]))
-    
