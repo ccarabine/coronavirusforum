@@ -3,10 +3,14 @@ from django.views.generic import DeleteView, CreateView
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.core.mail import send_mail
+
 from django.urls import reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import F, Q
+
 from .models import Post, Topic, Comment, Vote
 from .forms import PostForm, CommentForm
 
@@ -210,3 +214,40 @@ def VoteView(request, pk):
     # Return updated votes
     update.refresh_from_db()
     return HttpResponseRedirect(reverse('postdetail', args=[str(pk)]))
+
+@login_required
+def ContactUsReportView(request, slug):
+    email = request.user.email
+    username = request.user.username
+
+    if request.method == "POST":
+        message_subject_a = request.POST['message-subject-display']
+        message_email = request.POST['message-email']
+        message_body = request.POST['message']
+        send_mail(
+			message_subject_a,
+			message_body,
+			message_email,
+			['projectckcabs@gmail.com'],
+			)
+        return render(request, 'contactus.html',{'username':username})
+    else:
+        return render(request, 'contactus.html',
+                      {'slug': slug, 'email': email})
+
+def ContactUsView(request):
+
+    if request.method == "POST":
+        message_subject = request.POST['message-subject']
+        message_body = request.POST['message']
+        message_email = request.POST['message-email']
+        
+        send_mail(
+			message_subject,
+			message_body,
+			message_email,
+			['projectckcabs@gmail.com'],
+			)
+        return render(request, 'contactus.html', {'message_name': message_name})
+    else:
+        return render(request, 'contactus.html', {})

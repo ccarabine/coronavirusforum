@@ -8,7 +8,7 @@ def createUser(sender, instance, created, **kwargs):
     if created:
         user1 = instance
         subject = 'Welcome to CoronaVirus Forum'
-        message = 'We are glad you are here!'
+        message = 'Thank you for joining the CoronaVirus Forum'
 
         send_mail(
             subject,
