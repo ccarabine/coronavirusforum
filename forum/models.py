@@ -83,10 +83,9 @@ class Comment(models.Model):
     created = models.DateTimeField(verbose_name=("created"), auto_now_add=True)
 
     class Meta:
-        ordering = ["created"]
+        ordering = ["-created"]
         verbose_name = "Comment"
         verbose_name_plural = "Comments"
-        ordering = ["-created"]
 
     def __str__(self):
         return f"Comment {self.comment_body} by {self.name}"

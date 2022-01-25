@@ -57,7 +57,7 @@
       <h4 class="card-title">{{ post.title }}</h4>
       </a>
       <hr>
-      <h6> 22 Comments Created {{ post.created|timesince }}</h6>
+      <h6>  {{post.comment_post.count}} Commen{{post.comment_post.count|pluralize:"t,ts"}}   Created {{ post.created|timesince }}</h6>
 
     </div>
   </div>

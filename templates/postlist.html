@@ -3,57 +3,42 @@
 
 {% block content %}
 <div>
-    
-</div>
-  
-<div class="container">
-    <h4 class="header-style bg-color-primary txt-color"> Topic: {{ topic }}</h4>
 
+</div>
+
+<div class="container">
+
+    {% if query %}
+    <h4 class="header-style bg-color-primary txt-color"> Search: {{ query|title }}</h4>
+
+    {% else %}
+
+    <h4 class="header-style bg-color-primary txt-color"> Topic: {{ topic }}</h4>
+    
     <div class="mb-2">
         {% if user.is_authenticated %}
-            <h6><a href="{% url 'addpost' topic %}" class="txt-color-secondary"> -> Start a new post within this topic</a></h6>            
+        <h6><a href="{% url 'addpost' topic %}" class="txt-color-secondary"> -> Start a new post within this topic</a>
+        </h6>
         {% endif %}
-        {% for post in post_list %}
+       
+    {% endif %}
+    {% for post in post_list %}
         <div class="card card-post mb-2">
-            <a href="{{ post.get_absolute_url }}" class="card-links"> 
+            <a href="{{ post.get_absolute_url }}" class="card-links">
                 <div class="card-body">
                     <a href="{% url 'postdetail' post.id %}" class="card-links">
-                        <h4 class="card-title">{{ post.title }}</h4>
+                        <h4 class="card-title">{{ post.title|title }}</h4>
                         <hr>
-                        
-                        <h6>  Comment :{{ comments.count }}  Created {{ post.created|timesince }}</h6>
+
+                        <h6> {{post.comment_post.count}} Commen{{post.comment_post.count|pluralize:"t,ts"}} Created 
+                            {{post.created|timesince }}</h6>
+
                 </div>
             </a>
         </div>
-        {% endfor %}
+    {% endfor %}
     </div>
 </div>
-{% if is_paginated %}
-<nav class="pagination justify-content-center mb-2" aria-label="Page navigation">
-    <ul class="pagination"></ul>
-    {% if page_obj.has_previous %}
-    <li class="page-item "><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-    <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
-    {% endif %}
-
-    {% for i in paginator.page_range %}
-    {% if page_obj.number == i %}
-    <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
-    {% else %}
-    <li class="page-item "><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-    {% endif %}
-
-    {% endfor %}
-    </ul>
-
-    {% if page_obj.has_next %}
-    <li class="page-item "><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a> </li>
-    {% else %}
-    <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
-    {% endif %}
-</nav>
-
-{% endif %}
+{% include 'pagination.html' %}
 
 {%endblock%}

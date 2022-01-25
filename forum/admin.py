@@ -12,7 +12,7 @@ class PostAdmin(SummernoteModelAdmin):
         "slug": ("title",),
     }
     list_display = ("title", "topic", "owner", "created")
-    search_fields = ("title", "content")
+    search_fields = ("title", "topic")
     summernote_fields = ("excerpt",)
 
 

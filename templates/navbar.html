@@ -14,11 +14,11 @@
 
         <!-- Search area -->
         <div class="col-12 col-md-6 my-auto py-1 py-lg-0">
-            <form method="GET" action="#">
+            <form method="GET" action="{% url 'search'%}">
                 <div class="input-group w-100">
                     <label for="search" hidden>Search</label>
                     <input class="form-control border border-black rounded-0" type="text" id="search" name="q"
-                        placeholder="Enter search criteria">
+                        placeholder="Search Posts">
                     <div class="input-group-append">
                         <button class="form-control btn btn-black border border-black rounded-0 green-btn" type="submit"
                             value="search">Search

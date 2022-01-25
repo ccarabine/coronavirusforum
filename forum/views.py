@@ -4,6 +4,7 @@ from django.template.defaultfilters import slugify
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
+
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
 
@@ -215,6 +216,7 @@ def VoteView(request, pk):
     update.refresh_from_db()
     return HttpResponseRedirect(reverse('postdetail', args=[str(pk)]))
 
+
 @login_required
 def ContactUsReportView(request, slug):
     email = request.user.email
@@ -225,29 +227,51 @@ def ContactUsReportView(request, slug):
         message_email = request.POST['message-email']
         message_body = request.POST['message']
         send_mail(
-			message_subject_a,
-			message_body,
-			message_email,
-			['projectckcabs@gmail.com'],
-			)
-        return render(request, 'contactus.html',{'username':username})
+            message_subject_a,
+            message_body,
+            message_email,
+            ['projectckcabs@gmail.com'],
+            )
+        return render(request, 'contactus.html', {'username': username})
     else:
         return render(request, 'contactus.html',
                       {'slug': slug, 'email': email})
 
-def ContactUsView(request):
 
+def ContactUsView(request):
+    username = request.user.username
     if request.method == "POST":
         message_subject = request.POST['message-subject']
         message_body = request.POST['message']
         message_email = request.POST['message-email']
-        
+
         send_mail(
-			message_subject,
-			message_body,
-			message_email,
-			['projectckcabs@gmail.com'],
-			)
-        return render(request, 'contactus.html', {'message_name': message_name})
+            message_subject,
+            message_body,
+            message_email,
+            ['projectckcabs@gmail.com'],
+            )
+        return render(request, 'contactus.html',
+                      {'username': username})
     else:
         return render(request, 'contactus.html', {})
+
+
+class SearchPostsView(ListView):
+    model = Post
+    template_name = "postlist.html"
+    context_object_name = "post_list"
+    paginate_by = 5
+
+    def get_queryset(self):  # get all the posts by query
+        query = self.request.GET.get('q')
+        if query:
+            object_list = self.model.objects.filter(title__icontains=query)
+        else:
+            object_list = self.model.objects.none()
+        return object_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["query"] = self.request.GET.get('q')
+        return context
