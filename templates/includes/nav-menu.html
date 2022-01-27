@@ -13,29 +13,26 @@
             </a>
 
             <div class="dropdown-menu border-0" aria-labelledby="topic-links">
-              
+
                 {% for topic in topic_list %}
-                    <a href="/topic/{{ topic.name }}"
-                        class="dropdown-item nav-color">{{ topic.name|title }}
-                    </a>
+                <a href="/topic/{{ topic.name }}" class="dropdown-item nav-color">{{ topic.name|title }}
+                </a>
                 {% endfor %}
-              
+
             </div>
 
         </li>
-
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link nav-color mr-5" href="#" id="nhs-api"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                LATEST INFO FROM NHS
+        <li class="nav-item">
+            <a class="logo-font font-weight-bold nav-link nav-color mr-5" href="{% url 'govukdata' %}">
+                LATEST STATISTICS
             </a>
         </li>
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold  nav-link nav-color mr-5" href="#" id="about-us-link"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item">
+            <a class="logo-font font-weight-bold nav-link nav-color mr-5" href="{% url 'govukdata' %}">
                 ABOUT US
             </a>
         </li>
+
 
     </ul>
 </div>

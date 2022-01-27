@@ -27,5 +27,7 @@ urlpatterns = [
          name="contactus"),
     path("search/", views.SearchPostsView.as_view(),
          name="search"),
+    path("govukdata/", views.apiview,
+         name="govukdata"),
 
 ]

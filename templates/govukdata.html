@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="container login-form">
+    <h4 class="header-style bg-color-primary txt-color"> The official UK government data on coronavirus (COVID-19). </h4>
+    <div class="form-border">
+        <form class="mb2" method="post">
+            {% csrf_token %}
+            <div class="row ml-4">
+                <input type="date" class="ml-2 mr-2" value="{{selecteddate}}"min="{{mindate}}" max="{{maxdate}}"
+                    name="selecteddate">
+                <button type="submit" class="btn btn-secondary">Select date</button>
+            </div>
+        </form>
+        <hr>
+        {% if not formpost %}
+        <p>Select a date from the past 100 days to see the statistics</p>
+        {% else %}
+        <table class="table-width">
+            <tr>
+                <td class="font-weight-bold">Date</td>
+                <td class="font-weight-bold">{{date}}</td>
+            </tr>
+            <tr>
+                <td>Daily Cases</td>
+                <td>{{dailyCases}}</td>
+            </tr>
+            <tr>
+                <td>Cumulative Cases</td>
+                <td>{{cumulativeCases}}</td>
+            </tr>
+            <tr>
+                <td>Daily Deaths</td>
+                <td>{{dailyDeaths}}</td>
+            </tr>
+            <tr>
+                <td>Cumulative Deaths</td>
+                <td>{{cumulativeDeaths}}</td>
+            </tr>
+        </table>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

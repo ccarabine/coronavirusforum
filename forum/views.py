@@ -12,6 +12,9 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import F, Q
 
+from requests import get
+from json import dumps
+
 from .models import Post, Topic, Comment, Vote
 from .forms import PostForm, CommentForm
 
@@ -231,7 +234,7 @@ def ContactUsReportView(request, slug):
             message_body,
             message_email,
             ['projectckcabs@gmail.com'],
-            )
+        )
         return render(request, 'contactus.html', {'username': username})
     else:
         return render(request, 'contactus.html',
@@ -250,7 +253,7 @@ def ContactUsView(request):
             message_body,
             message_email,
             ['projectckcabs@gmail.com'],
-            )
+        )
         return render(request, 'contactus.html',
                       {'username': username})
     else:
@@ -275,3 +278,81 @@ class SearchPostsView(ListView):
         context = super().get_context_data(**kwargs)
         context["query"] = self.request.GET.get('q')
         return context
+
+
+# "ENDPOINT and response code taken from
+# https://coronavirus.data.gov.uk/details/developers-guide/main-api"
+def apiview(request):
+
+    ENDPOINT = "https://api.coronavirus.data.gov.uk/v1/data"
+    AREA_TYPE = "nation"
+    AREA_NAME = "england"
+
+    filters = [
+        f"areaType={ AREA_TYPE }",
+        f"areaName={ AREA_NAME }"
+    ]
+
+    structure = {
+        "date": "date",
+        "name": "areaName",
+        "code": "areaCode",
+        "dailyCases": "newCasesByPublishDate",
+        "cumulativeCases": "cumCasesByPublishDate",
+        "dailyDeaths": "newDeaths28DaysByPublishDate",
+        "cumulativeDeaths": "cumDeaths28DaysByPublishDate"
+    }
+
+    api_params = {
+        "filters": str.join(";", filters),
+        "structure": dumps(structure, separators=(",", ":"))
+    }
+
+    response = get(ENDPOINT, params=api_params, timeout=10)
+
+    if response.status_code >= 400:
+        raise RuntimeError(f'Request failed: { response.text }')
+
+    responseapi = response.json()
+
+    datelist = []
+    for x in range(0, 100):
+        datelist.append(responseapi['data'][x]['date'])
+
+    mindate = min(datelist)
+    maxdate = max(datelist)
+    selecteddate = maxdate
+    formpost = False
+
+    if request.method == "POST":
+        formpost = True
+        selecteddate = request.POST['selecteddate']
+        for x in range(0, 100):
+            if selecteddate == responseapi['data'][x]['date']:
+                date = (responseapi['data'][x]['date'])
+                name = (responseapi['data'][x]['name'])
+                dailyCases = (responseapi['data'][x]['dailyCases'])
+                cumulativeCases = (responseapi['data'][x]['cumulativeCases'])
+                dailyDeaths = (responseapi['data'][x]['dailyDeaths'])
+                cumulativeDeaths = (responseapi['data'][x]['cumulativeDeaths'])
+
+        context = {'formpost': formpost,
+                   'datelist': datelist,
+                   'date': date,
+                   'name': name,
+                   'dailyCases': dailyCases,
+                   'cumulativeCases': cumulativeCases,
+                   'dailyDeaths': dailyDeaths,
+                   'cumulativeDeaths': cumulativeDeaths,
+                   'mindate': mindate,
+                   'maxdate': maxdate,
+                   'selecteddate': selecteddate
+                   }
+        return render(request, 'govukdata.html', context)
+
+    context = {'datelist': datelist,
+               'mindate': mindate,
+               'maxdate': maxdate,
+               'selecteddate': selecteddate
+               }
+    return render(request, 'govukdata.html', context)

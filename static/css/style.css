@@ -331,6 +331,11 @@ color: var(--color-background-primary)
   cursor: pointer;
 }
 
+/* --- stats table --- */
+.table-width{
+  width: 100%;
+}
+
 @media screen and (max-width: 725px) {
 
   .carousel-inner img {

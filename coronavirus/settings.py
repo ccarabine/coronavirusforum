@@ -179,9 +179,10 @@ MESSAGE_TAGS = {
 WSGI_APPLICATION = "coronavirus.wsgi.application"
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://8000-magenta-raven-g5b6gq55.ws-eu28.gitpod.io",
+    "https://8000-magenta-raven-g5b6gq55.ws-eu29.gitpod.io",
 ]
-
+# to put comma's in numbers by 1000
+USE_THOUSAND_SEPARATOR = True
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
