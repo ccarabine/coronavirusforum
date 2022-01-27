@@ -72,8 +72,8 @@
   font-size: 1.1em;
   padding-right: 40px;
   padding-left: 40px;
-  margin-right: 80px;
-  margin-left: 80px;
+
+ 
   font-weight: bold;
 }
 
@@ -133,6 +133,7 @@ a:link {
   width: 550px;
   height: 250px;
 }
+
 
 /* --- Post card styling --- */
 .card {
@@ -335,7 +336,9 @@ color: var(--color-background-primary)
 .table-width{
   width: 100%;
 }
-
+.center{
+  text-align: center;
+}
 @media screen and (max-width: 725px) {
 
   .carousel-inner img {

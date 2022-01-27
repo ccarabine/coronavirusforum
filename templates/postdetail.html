@@ -61,7 +61,7 @@
             {% endif %}
             {% if post.post_image %}
             <a href="{% url 'postdetail' post.id %}">
-                <img src="{{ post.post_image.url }}" class="card-img-top" alt="{{ post.name }}">
+                <img src="{{ post.post_image.url }}" class="card-img-top img-fluid img-thumbnail" alt="{{ post.name }}">
             </a>
             {% endif %}
         </div>

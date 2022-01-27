@@ -327,7 +327,7 @@ def apiview(request):
     if request.method == "POST":
         formpost = True
         selecteddate = request.POST['selecteddate']
-        for x in range(0, 100):
+        for x in range(0, 200):
             if selecteddate == responseapi['data'][x]['date']:
                 date = (responseapi['data'][x]['date'])
                 name = (responseapi['data'][x]['name'])
