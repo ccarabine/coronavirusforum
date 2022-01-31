@@ -3,6 +3,7 @@ from django.views.generic import DeleteView, CreateView
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from django.core.paginator import Paginator
@@ -244,8 +245,10 @@ def ContactUsReportView(request, slug):
             message_email,
             ['projectckcabs@gmail.com'],
         )
+        messages.success(request, 'Email sent successfully')
         return render(request, 'contactus.html', {'username': username})
     else:
+        print(username)
         return render(request, 'contactus.html',
                       {'slug': slug, 'email': email})
 
@@ -263,12 +266,14 @@ def ContactUsView(request):
             message_email,
             ['projectckcabs@gmail.com'],
         )
+        messages.success(request, 'Email sent successfully')
         return render(request, 'contactus.html',
                       {'username': username})
     else:
+       
         return render(request, 'contactus.html', {})
 
-
+    
 class SearchPostsView(ListView):
     model = Post
     template_name = "postlist.html"
