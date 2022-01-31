@@ -11,8 +11,6 @@
         </div>
     </a>
     <div class="dropdown-menu border-0" aria-labelledby="user-options-mobile">
-
-        <a href="#" class="dropdown-item">My Profile</a>
         {% if user.is_authenticated %}
         <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
         {% else %}
@@ -35,7 +33,7 @@
             <div class="input-group w-100">
                 <label for="search-mobile" hidden>Search</label>
                 <input class="form-control border border-black rounded-0" type="text" id="search-mobile" name="q"
-                    placeholder="Search our site">
+                    placeholder="Search post titles">
                 <div class="input-group-append">
                     <button class="form-control form-control btn btn-black border border-black rounded-0 green-btn"
                         id="search-btn" type="submit">Search

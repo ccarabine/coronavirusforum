@@ -4,29 +4,29 @@
 
 {% block content %}
 
-<div class="container login-form">
+<div class="container col-lg-8 col-md-10">
   {% if process == "connect" %}
-  <h1 class="header-style bg-color-primary txt-color">
-    {% blocktrans with provider.name as provider %}Connect 
+  <h4 class="header-style header-title-color">
+    {% blocktrans with provider.name as provider %}Connect
     {{provider}}{% endblocktrans %}
-  </h1>
+  </h4>
   <div class="form-border">
     <p>{% blocktrans with provider.name as provider %}
-      You are about to connect a new third party account from 
+      You are about to connect a new third party account from
       {{ provider}}.{% endblocktrans %}</p>
     {% else %}
-    <h1 class="header-style bg-color-primary txt-color">
-      {% blocktrans with provider.name as provider %}Sign In Via 
-      {{ provider }}{% endblocktrans %}</h1>
+    <h4 class="header-style header-title-color">
+      {% blocktrans with provider.name as provider %}Sign In Via
+      {{ provider }}{% endblocktrans %}</h4>
 
     <p>{% blocktrans with provider.name as provider %}
-      You are about to sign in using a third party account from 
+      You are about to sign in using a third party account from
       {{ provider }}.{% endblocktrans %}</p>
     {% endif %}
 
     <form method="post">
       {% csrf_token %}
-      <button class="btn btn-secondary" type="submit">{% trans "Continue" %}</button>
+      <button class="btn btn-secondary mb-2" type="submit">{% trans "Continue" %}</button>
     </form>
   </div>
 </div>

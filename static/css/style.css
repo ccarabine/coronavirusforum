@@ -5,63 +5,71 @@
   box-sizing: border-box;
   /* padding and border are included in the width and height*/
 }
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  }
+main {
+  flex-grow: 1;
+  }
 
 /* --- color variables --- */
 :root {
-  --color-text: white;
-  --color-text-secondary: #58595b;
+  /* CSS HEX */
+  --color-caribbean-green: #26c585ff;
+  --color-maximum-blue: #44b2cdff;
+  --color-skobeloff: #196366ff;
+  --color-rich-black-fogra-29: #01030fff;
+  --color-maximum-blue-2: #44b2cdff;
+  --color-white: white;
+  --color-background-comment: #caced1;
+
+  --color-nav: #58595b;
   --color-text-button: #000000;
-  --color-background-primary: #367588;
-  --color-background-secondary: #FF6F59;
-  --color-background-link: #F02200;
-  --color-background-tertiary: #11262C;
-  --color-background-button: #697d96;
 }
 
-.bg-color-primary {
-  background-color: var(--color-background-primary)
+/* --- color styling --- */
+.background-color-main {
+  background-color: var(--color-maximum-blue-2);
 }
 
-.bg-color-white {
-  background-color: white;
+.header-title-color {
+  background-color: var(--color-skobeloff);
+  color: var(--color-white);
 }
 
-.txt-color {
-  color: var(--color-text);
+.post-color {
+  color: var(--color-rich-black-fogra-29);
+  background-color: var(--color-white);
 }
 
-.txt-color-secondary {
-  color: var(--color-text-secondary);
+.post-details-color {
+  color: var(--color-skobeloff);
+  background-color: var(--color-white);
 }
 
-.background-color-secondary {
-  background-color: var(--color-background-secondary);
-  color: var(--color-text);
+.comment-box-color {
+  color: var(--color-rich-black-fogra-29);
+  background-color: var(--color-background-comment);
 }
 
-.comments{
-  background-color:white;
-  color: var(--color-background-primary);
-}
-
-.mar-right {
-  margin-right: 10px;
-}
-
-/* --- Navbar styling --- */
 .nav-color {
-  color: var(--color-text-secondary);
-  background-color: var(--color-text);
-}
-
-.navbar .navbar-toggler {
-  border: 0;
+  color: var(--color-nav);
+  background-color: var(-color-rich-black-fogra-29);
 }
 
 /* --- Header styling --- */
 .header-style {
   border-style: double;
   padding: 10px;
+
+}
+a.header-links:hover {
+  text-decoration: underline;
+  color: var(--color-white);
+  cursor: pointer;
 
 }
 
@@ -72,61 +80,30 @@
   font-size: 1.1em;
   padding-right: 40px;
   padding-left: 40px;
-
- 
   font-weight: bold;
 }
 
 /* --- Post link styling --- */
 /* visited link */
 .card-links {
-  color: var(--color-text);
+  color: var(--color-rich-black-fogra-29);
 }
 
 a.card-links:visited {
-  color: var(--color-text);
+  color: var(--color-rich-black-fogra-29);
 }
+
 a.card-links:hover {
   text-decoration: underline;
-  color: var(--color-text);
-  
+  color: var(--color-rich-black-fogra-29);
 }
+
 .card-post:hover {
   transform: scale(1.01);
   box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
 }
 
-/* --- Footer styling --- */
-/* visited link */
-.ft-links {
-  color: var(--color-text);
-}
 
-.ft-links a:visited {
-  color: var(--color-text);
-}
-
-.ft-links a:hover {
-  text-decoration: underline;
-}
-
-.ft-links a:active {
-  color: var(--color-text);
-}
-
-
-.ft-container {
-  background-color: var(--color-background-primary);
-}
-
-.ft-center {
-  text-align: center;
-}
-
-a:link {
-  text-decoration: none;
-
-}
 
 /* Make the image fully responsive */
 .carousel-inner img {
@@ -134,11 +111,22 @@ a:link {
   height: 250px;
 }
 
+.img-container {
+  overflow: none;
+  width: 8rem;
+
+}
+.img-size{
+width:120px;
+}
 
 /* --- Post card styling --- */
 .card {
-  background-color: var(--color-background-secondary);
-  color: var(--color-text);
+  border: none
+}
+
+.card-body {
+  padding: 0px
 }
 
 /* --- Pagination --- */
@@ -149,12 +137,12 @@ a:link {
 }
 
 .page-link {
-  color: var(--color-background-tertiary);
+  color: var(--color-rich-black-fogra-29);
 }
 
 .page-item.active .page-link {
-  background-color: var(--color-background-primary);
-  color: var(--color-text);
+  background-color: var(--color-skobeloff);
+  color: var(--color-white);
 }
 
 .post-border {
@@ -162,20 +150,17 @@ a:link {
   padding: 3px;
 }
 
-
-
-/* --- From styling --- */
+/* --- Form styling --- */
 .asteriskField {
   display: none;
 }
 
 .checkbox-lg {
-
   padding-top: 5px;
   font-size: 1.2em;
 }
 
-/* --- Socail media styling --- */
+/* --- Social media styling --- */
 /* Code used from  https://codepen.io/ephs23/pen/NeQZGx */
 footer ul {
   display: flex;
@@ -183,12 +168,10 @@ footer ul {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
- 
 }
 
 footer ul li {
   list-style: none;
-
 }
 
 footer ul li a {
@@ -205,16 +188,13 @@ footer ul li a {
   overflow: hidden;
   border: 3px solid #fff;
   z-index: 1;
- 
 }
-
 
 footer ul li a .icon {
   position: relative;
   color: #262626;
   transition: .5s;
   z-index: 3;
-  
 }
 
 footer ul li a:hover .icon {
@@ -232,18 +212,17 @@ footer ul li a:before {
   background: #f00;
   transition: .5s;
   z-index: 2;
-  
 }
 
 footer ul li a:hover:before {
   top: 0;
 }
 
-footer ul li:nth-child(1) a:before{
+footer ul li:nth-child(1) a:before {
   background: #3b5999;
 }
 
-footer ul li:nth-child(2) a:before{
+footer ul li:nth-child(2) a:before {
   background: #55acee;
 }
 
@@ -253,19 +232,20 @@ footer ul li:nth-child(3) a:before {
 
 /* --- Google button --- */
 .btn-google {
-  
+
   box-shadow: 0 1px 2px 1px #ddd;
   border-radius: 2px;
   font-size: 15px;
-  
+
   cursor: pointer
 }
 
 .btn-facebook {
   color: white;
   background-color: #3b5998;
-  border-color: rgba(0,0,0,0.2);
+  border-color: rgba(0, 0, 0, 0.2);
 }
+
 .btn-social {
   position: relative;
   padding-left: 44px;
@@ -274,9 +254,11 @@ footer ul li:nth-child(3) a:before {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .btn-social:hover {
   color: #eee;
 }
+
 .btn-social :first-child {
   position: absolute;
   left: 0;
@@ -286,65 +268,111 @@ footer ul li:nth-child(3) a:before {
   padding: 7px;
   font-size: 1.6em;
   text-align: center;
-  border-right: 1px solid rgba(0,0,0,0.2)
+  border-right: 1px solid rgba(0, 0, 0, 0.2)
 }
 
-.login-form {
-  width: 425px;
-  margin: 30px auto;
-}
-.form-border {        
+.form-border {
   margin-bottom: 15px;
   background: #f7f7f7;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   padding: 30px;
-  }
-.login-form h2 {
-      margin: 0 0 15px;
 }
+
+.login-form h2 {
+  margin: 0 0 15px;
+}
+
 .or-seperator {
   margin-top: 20px;
   text-align: center;
   border-top: 1px solid #ccc;
 }
+
 .or-seperator i {
-    padding: 0 10px;
-    background: #f7f7f7;
-    position: relative;
-    top: -11px;
-    z-index: 1;
-}   
+  padding: 0 10px;
+  background: #f7f7f7;
+  position: relative;
+  top: -11px;
+  z-index: 1;
+}
+
+/* --- Footer styling --- */
+/* visited link */
+.ft-links a {
+  color: var(--color-white);
+}
+
+.ft-links a:visited {
+  color: var(--color-white);
+}
+
+.ft-links a:hover {
+  text-decoration: underline;
+}
+
+.ft-links a:active {
+  color: var(--color-white);
+}
+
+.ft-center {
+  text-align: center;
+}
 
 /* --- voting thumbs --- */
 .hide {
-  display:none;
+  display: none;
 }
 
-.active{
-color: var(--color-background-primary)
+.active {
+  color: var(--color-caribbean-green)
 }
 
-.not-active{
-  color:white
-  }
+.not-active {
+  color: var(--color-skobeloff);
+}
 
-.cursor{
+.cursor {
   cursor: pointer;
 }
 
-/* --- stats table --- */
-.table-width{
-  width: 100%;
+.fa,
+.fab,
+.fad,
+.fal,
+.far,
+.fas {
+  line-height: 1.5;
 }
-.center{
+
+/* --- General helper styling --- */
+.mar-right {
+  margin-right: 10px;
+}
+
+/* --- Navbar styling --- */
+.navbar .navbar-toggler {
+  border: 0;
+}
+
+.text-area {
+  height: 20em;
+}
+
+.btn-border-none{
+  border:none
+}
+
+.center {
   text-align: center;
 }
+
 @media screen and (max-width: 725px) {
 
   .carousel-inner img {
     width: 100%;
     height: 100%;
   }
+
   .header-paragraph {
 
     font-size: 1em;
@@ -352,6 +380,6 @@ color: var(--color-background-primary)
     padding-left: 5px;
     margin-right: 5px;
     margin-left: 5px;
- 
+
   }
 }

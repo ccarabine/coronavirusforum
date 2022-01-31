@@ -2,97 +2,133 @@
 {% load static %}
 
 {% block content %}
-<div>
-
-</div>
-<div class="container">
-    <h4 class="header-style bg-color-primary txt-color"> Topic: {{ post.topic }}</h4>
-    <div class="card background-color-secondary mb-2">
-        <div class="card-body">
-            {% if user.is_authenticated %}
-            {% if user.id == post.owner.id %}
-            <a href="{% url 'updatepost' post.pk %}"> update</a>
-            <a href="{% url 'deletepost' post.pk %}"> Delete</a>
-            {% endif %}
-            {% endif %}
-            <h4 class="card-title">{{ post.title | safe }}</h4>
-            <hr>
-            <h4 class="card-title">{{ post.body | safe }}</h4>
-
-            <h6>
-            {% if user.is_authenticated %}
-                <form action="{% url 'vote' post.pk %}" method="POST" id="voteForm">
-                    {% csrf_token %}
-                    {% if post.enable_voting %}
-                        <span>{{post.upvote}}</span>
-                        <i class="fas fa-thumbs-up mr-2 cursor
+<div class="container col-lg-8 col-md-10">
+    <a href="/topic/{{ post.topic }}" class="header-links">
+        <h4 class="header-style header-title-color"> Topic: {{ post.topic }}</h4>
+    </a>
+    <div class="card col">
+        <div class="card-body px-2 pt-2 post-color rounded">
+            <h5>{{ post.title | safe | title}}</h5>
+            <small>{{ post.body | safe }}</small>
+            <div class="img-container img-fluid">
+                {% if post.post_image %}
+                <a href="{% url 'postdetail' post.id %}">
+                    <img src="{{ post.post_image.url }}" class="card-img-top mt-2 img-fluid img-thumbnail card-links"
+                        alt="{{ post.name }}">
+                </a>
+                {% endif %}
+            </div>
+            <div class="d-flex justify-content-start post-details-color mt-3">
+                {% if user.is_authenticated %}
+                <!--user logged-->
+                <div class="row">
+                    <div class="col">
+                        <form action="{% url 'vote' post.pk %}" method="POST" id="voteForm">
+                            {% csrf_token %}
+                            {% if post.enable_voting %}
+                            <!--Enabled voting true, display thumbs and allow user to vote-->
+                            <span>{{post.upvote}}</span>
+                            <i class="fas fa-thumbs-up mr-2 cursor
                             {% if voted and upvoted %}
                                 active
                             {% else %}
                                 not-active
                             {% endif %}" id="upThumb"></i>
-                        <input type="checkbox" class="hide" name="upVote" id="upVote" unchecked>
-
-                        <span>{{post.downvote}}</span>
-                        <i class="fas fa-thumbs-down mr-3 cursor
+                            <input type="checkbox" class="hide" name="upVote" id="upVote" unchecked>
+                            <span>{{post.downvote}}</span>
+                            <i class="fas fa-thumbs-down mr-3 cursor
                                 {% if voted and not upvoted %}
                                     active
                                 {% else %}
                                 not-active
                                 {% endif %}" id="downThumb"></i>
-                        <input type="checkbox" class="hide" name="downVote" id="downVote" unchecked>
-                        <Button type="submit" class="hide" style="width:100px"></Button>
+                            <input type="checkbox" class="hide" name="downVote" id="downVote" unchecked>
+                            <Button type="submit" class="hide"></Button>
+                            <i class="far fa-comment"></i>
+                            <span class="mr-1">{{post.comment_post.count}} </span>
+                            <span class="mr-2"> Posted by {{post.user_name}}</span>
+                            <span class="mr-2"> Created {{post.created|timesince }} ago</span>
+                            {% else %}
+                            <!--logged in, enabled voting false. no thumbs shown, display comments-->
+                            <i class="far fa-comment"></i>
+                            <span class="mr-1">{{post.comment_post.count}} </span>
+                            <span class="mr-2"> Posted by {{post.user_name}}</span>
+                            <span class="mr-2"> Created {{post.created|timesince }} ago</span>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+                {% else %}
 
-                        <h6>  {{post.comment_post.count}} Commen{{post.comment_post.count|pluralize:"t,ts"}}   Created {{ post.created|timesince }}</h6>
-                    {% else %} <!--logged in, enabled voting false. display when posted created-->
-                    <h6>  {{post.comment_post.count}} Commen{{post.comment_post.count|pluralize:"t,ts"}}   Created {{ post.created|timesince }}</h6>
+                <!--user not logged in, display thumbs, number of comments and when created-->
+                <div class="container pl-1">
+                    <div class="row post-details-color">
+                        <div class="col">
+                            <span>{{post.upvote}}<i class="fas fa-thumbs-up mr-2 ml-1 "></i></span>
+                            <span>{{post.downvote}}<i class="fas fa-thumbs-down mr-3 ml-1"></i></span>
+                            <i class="far fa-comment mr-1"></i>
+                            <span class="mr-1">{{post.comment_post.count}} </span>
+                            <span class="mr-2"> Posted by {{post.user_name}}</span>
+                            <span class="mr-2"> Created {{post.created|timesince }} ago</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <small><a href="{% url 'account_login' %}" class="card-links">Sign In to vote</a>
+                            </small>
+                            {% endif %}
+                        </div>
+
+                        {% if user.is_authenticated %}
+                        {% if user.id == post.owner.id %}
+                        <small>
+                            <a href="{% url 'updatepost' post.pk %}" class="card-links mr-1"> Update</a>
+                            <a href="{% url 'deletepost' post.pk %}" class="card-links mr-1"> Delete</a>
+                        </small>
+                        {% endif %}
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                        <small>
+                            <a href="{% url 'contactus_report' post.slug %}" class="card-links mr-1">Report post</a>
+                        </small>
+                        {% endif %}
+                    </div>
+
+
+                    <hr class="mx-2">
+
+                    {% if not post.comment_post.all %}
+                    <span class="mb-2">No Comments Yet..
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'addcomment' post.pk %}" class="card-links ml-2">Add one</a>
+                        {% endif %}
+                    </span>
+                    {% else %}
+
+                    <h4 class="title-bar ml-3 ">Comments...</h4>
+                    {% if user.is_authenticated %}
+                    <small class="mb-2 ml-3">
+                        <a href="{% url 'addcomment' post.pk %}" class="card-links"> Add comment</a>
+                    </small>
                     {% endif %}
-                </form>
-               
-            {% else %}
-                <span>{{post.upvote}}<i class="fas fa-thumbs-up mr-2 ml-1 "></i></span>
-                <span>{{post.downvote}}<i class="fas fa-thumbs-down mr-3 ml-1"></i></span>
-                <span>  {{post.comment_post.count}} Commen{{post.comment_post.count|pluralize:"t,ts"}}   Created {{ post.created|timesince }}</span>
-                <span><a href="{% url 'account_login' %}">Sign In to vote</a></span>
-            {% endif %}
-            </h6>
-            {% if user.is_authenticated %}
-                <a href="{% url 'contactus_report' post.slug %}" >Report post</a>
-            {% endif %}
-            {% if post.post_image %}
-            <a href="{% url 'postdetail' post.id %}">
-                <img src="{{ post.post_image.url }}" class="card-img-top img-fluid img-thumbnail" alt="{{ post.name }}">
-            </a>
-            {% endif %}
+                    {% for comment in page_obj %}
+                    <div class="card col-lg-10 col-md-8 ">
+                        <div class="card-body px-2 pt-2 rounded comment-box-color bg-gradient-light">
+                            <h6 class="font-weight-bold"> {{ comment.name | title }}</h6>
+                            <div> {{ comment.comment_body | safe}}</div>
+                        </div>
+                        <small class="title-bar ml-2 ">
+                            {{ comment.created|timesince }} ago
+                            <hr class="mx-2">
+                        </small>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
-    </br>
 
-    <div>
-        {% if not post.comment_post.all %}
-        No Comments Yet..{% if user.is_authenticated %}<a href="{% url 'addcomment' post.pk %}">Add one</a>{% endif %}
-        {% else %}
-        {% if user.is_authenticated %}
-        <a href="{% url 'addcomment' post.pk %}"> Add comment</a>
-        {% endif %}
-        {% for comment in page_obj %}
-
-        <h6 class="comments">
-            {{ comment.name }} Created:
-            {{ comment.created|timesince }} ago
-        </h6>
-        <h6>
-            {{ comment.comment_body | safe}}
-
-        </h6>
-
-
-        <hr>
-
-        {% endfor %}
-        {% endif %}
-    </div>
+    {% include 'pagination.html' %}
 </div>
-
-{% include 'pagination.html' %}
 {% endblock %}

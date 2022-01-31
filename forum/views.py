@@ -94,6 +94,7 @@ def addPost(request, topic):
             post = form.save(commit=False)
             post.slug = slugify(request.POST["title"])
             post.owner = request.user
+            post.user_name = request.user.username
             post.topic = topic_obj
             post.post_image = request.FILES.get("post_image")
             post.owner = request.user
