@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <p class="header-paragraph header-title-color justify-content-center">
+    The Coronavirus Forum, an inclusive engagement platform to pool & share information, tips and advice, create opinion
+    polls, interact and find support and official NHS resources and information.
+  </p>
+</div>
+
+<div class="jumbotron mx-2">
+  <h1 class="display-4">Page Not Found</h1>
+  <p class="lead">Sorry, this page does not exist</p>
+  <hr class="my-4">
+  <p class="lead">
+    <a class="btn btn-secondary btn-lg" href="{% url 'home' %}" role="button">Home page</a>
+  </p>
+</div>
+
+{%endblock%}

@@ -19,6 +19,14 @@ from .models import Post, Topic, Comment, Vote
 from .forms import PostForm, CommentForm
 
 
+def error_404_view(request, exception):
+    return render(request, '404error.html')
+
+
+def error_500_view(request):
+    return render(request, '500error.html')
+
+
 class PostListHomeView(ListView):
     model = Post
     queryset = Post.objects.order_by("-created")[:5]
@@ -284,76 +292,78 @@ class SearchPostsView(ListView):
 # "ENDPOINT and response code taken from
 # https://coronavirus.data.gov.uk/details/developers-guide/main-api"
 def apiview(request):
+    try:
+        ENDPOINT = "https://api.coronavirus.data.gov.uk/v1/data"
+        AREA_TYPE = "nation"
+        AREA_NAME = "england"
 
-    ENDPOINT = "https://api.coronavirus.data.gov.uk/v1/data"
-    AREA_TYPE = "nation"
-    AREA_NAME = "england"
+        filters = [
+            f"areaType={ AREA_TYPE }",
+            f"areaName={ AREA_NAME }"
+        ]
 
-    filters = [
-        f"areaType={ AREA_TYPE }",
-        f"areaName={ AREA_NAME }"
-    ]
+        structure = {
+            "date": "date",
+            "name": "areaName",
+            "code": "areaCode",
+            "dailyCases": "newCasesByPublishDate",
+            "cumulativeCases": "cumCasesByPublishDate",
+            "dailyDeaths": "newDeaths28DaysByPublishDate",
+            "cumulativeDeaths": "cumDeaths28DaysByPublishDate"
+        }
 
-    structure = {
-        "date": "date",
-        "name": "areaName",
-        "code": "areaCode",
-        "dailyCases": "newCasesByPublishDate",
-        "cumulativeCases": "cumCasesByPublishDate",
-        "dailyDeaths": "newDeaths28DaysByPublishDate",
-        "cumulativeDeaths": "cumDeaths28DaysByPublishDate"
-    }
+        api_params = {
+            "filters": str.join(";", filters),
+            "structure": dumps(structure, separators=(",", ":"))
+        }
 
-    api_params = {
-        "filters": str.join(";", filters),
-        "structure": dumps(structure, separators=(",", ":"))
-    }
+        response = get(ENDPOINT, params=api_params, timeout=10)
 
-    response = get(ENDPOINT, params=api_params, timeout=10)
+        responseapi = response.json()
 
-    if response.status_code >= 400:
-        raise RuntimeError(f'Request failed: { response.text }')
+        datelist = []
+        for x in range(0, 100):
+            datelist.append(responseapi['data'][x]['date'])
 
-    responseapi = response.json()
+        mindate = min(datelist)
+        maxdate = max(datelist)
+        selecteddate = maxdate
+        formpost = False
 
-    datelist = []
-    for x in range(0, 100):
-        datelist.append(responseapi['data'][x]['date'])
+        if request.method == "POST":
+            formpost = True
+            selecteddate = request.POST['selecteddate']
+            for x in range(0, 200):
+                if selecteddate == responseapi['data'][x]['date']:
+                    date = (responseapi['data'][x]['date'])
+                    name = (responseapi['data'][x]['name'])
+                    dailyCases = (responseapi['data'][x]['dailyCases'])
+                    cumulativeCases = (
+                        responseapi['data'][x]['cumulativeCases'])
+                    dailyDeaths = (responseapi['data'][x]['dailyDeaths'])
+                    cumulativeDeaths = (
+                        responseapi['data'][x]['cumulativeDeaths'])
 
-    mindate = min(datelist)
-    maxdate = max(datelist)
-    selecteddate = maxdate
-    formpost = False
+            context = {'formpost': formpost,
+                       'datelist': datelist,
+                       'date': date,
+                       'name': name,
+                       'dailyCases': dailyCases,
+                       'cumulativeCases': cumulativeCases,
+                       'dailyDeaths': dailyDeaths,
+                       'cumulativeDeaths': cumulativeDeaths,
+                       'mindate': mindate,
+                       'maxdate': maxdate,
+                       'selecteddate': selecteddate
+                       }
+            return render(request, 'govukdata.html', context)
 
-    if request.method == "POST":
-        formpost = True
-        selecteddate = request.POST['selecteddate']
-        for x in range(0, 200):
-            if selecteddate == responseapi['data'][x]['date']:
-                date = (responseapi['data'][x]['date'])
-                name = (responseapi['data'][x]['name'])
-                dailyCases = (responseapi['data'][x]['dailyCases'])
-                cumulativeCases = (responseapi['data'][x]['cumulativeCases'])
-                dailyDeaths = (responseapi['data'][x]['dailyDeaths'])
-                cumulativeDeaths = (responseapi['data'][x]['cumulativeDeaths'])
-
-        context = {'formpost': formpost,
-                   'datelist': datelist,
-                   'date': date,
-                   'name': name,
-                   'dailyCases': dailyCases,
-                   'cumulativeCases': cumulativeCases,
-                   'dailyDeaths': dailyDeaths,
-                   'cumulativeDeaths': cumulativeDeaths,
+        context = {'datelist': datelist,
                    'mindate': mindate,
                    'maxdate': maxdate,
                    'selecteddate': selecteddate
                    }
         return render(request, 'govukdata.html', context)
-
-    context = {'datelist': datelist,
-               'mindate': mindate,
-               'maxdate': maxdate,
-               'selecteddate': selecteddate
-               }
-    return render(request, 'govukdata.html', context)
+    except Exception as e:
+        context = {'e': e}
+        return render(request, '500error.html', context)
