@@ -52,16 +52,16 @@ INSTALLED_APPS = [
     "django_summernote",
     "django.contrib.sites",
     "forum",
-    
+
     # allauth
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    
+
     # providers
     "allauth.socialaccount.providers.facebook",
     "allauth.socialaccount.providers.google",
-    
+
     # Other
     "storages",
     "crispy_forms",
@@ -184,8 +184,9 @@ CSRF_TRUSTED_ORIGINS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 if "DATABASE_URL" in os.environ:
-    DATABASES = {"default": dj_database_url.parse(
-        os.environ.get("DATABASE_URL"))}
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+        }
 else:
     print("Postgres URL not found, using sqlite instead")
     DATABASES = {
@@ -267,7 +268,7 @@ if "USE_AWS" in os.environ:
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-#Email backend
+# Email backend
 if 'DEVELOPMENT' in os.environ:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     DEFAULT_FROM_EMAIL = "Corona Virus Forum team <noreply@coronaforum.com>"
