@@ -34,13 +34,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 
 ALLOWED_HOSTS = ["coronavirusforum.herokuapp.com", "localhost"]
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -50,51 +51,23 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_summernote",
     "django.contrib.sites",
+    "forum",
+    
     # allauth
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "forum",
-    # Other
-    "storages",
-    "crispy_forms",
+    
     # providers
     "allauth.socialaccount.providers.facebook",
     "allauth.socialaccount.providers.google",
+    
+    # Other
+    "storages",
+    "crispy_forms",
+
 ]
 
-SOCIALACCOUNT_PROVIDERS = {
-    "facebook": {
-        "METHOD": "oauth2",
-        "SCOPE": ["email"],
-        "AUTH_PARAMS": {"auth_type": "reauthenticate"},
-        "LOCALE_FUNC": lambda request: "en_US",
-        "VERSION": "v2.4",
-    },
-    "google": {"SCOPE": ["email"], "AUTH_PARAMS": {"access_type": "online"}},
-}
-CRISPY_TEMPLATE_PACK = "bootstrap4"
-
-SUMMERNOTE_CONFIG = {
-    "summernote": {
-        # As an example, using Summernote Air-mode
-        "airMode": False,
-        # Change editor size
-        "width": "100%",
-        "height": "280",
-        # Use proper language setting automatically (default)
-        "lang": None,
-        # Toolbar customization
-        # https://summernote.org/deep-dive/#custom-toolbar-popover
-        "toolbar": [
-            ["style", ["style"]],
-            ["font", ["bold", "underline", "clear"]],
-            ["fontname", ["fontname"]],
-            ["color", ["color"]],
-            ["para", ["ul", "ol", "paragraph"]],
-        ],
-    },
-}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -135,6 +108,45 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
+
+SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    "facebook": {
+        "METHOD": "oauth2",
+        "SCOPE": ["email"],
+        "AUTH_PARAMS": {"auth_type": "reauthenticate"},
+        "LOCALE_FUNC": lambda request: "en_US",
+        "VERSION": "v2.4",
+    },
+    "google": {"SCOPE": ["email"], "AUTH_PARAMS": {"access_type": "online"}},
+}
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+SUMMERNOTE_CONFIG = {
+    "summernote": {
+        # As an example, using Summernote Air-mode
+        "airMode": False,
+        # Change editor size
+        "width": "100%",
+        "height": "280",
+        # Use proper language setting automatically (default)
+        "lang": None,
+        # Toolbar customization
+        # https://summernote.org/deep-dive/#custom-toolbar-popover
+        "toolbar": [
+            ["style", ["style"]],
+            ["font", ["bold", "underline", "clear"]],
+            ["fontname", ["fontname"]],
+            ["color", ["color"]],
+            ["para", ["ul", "ol", "paragraph"]],
+        ],
+    },
+}
+
+# to put comma's in numbers by 1000
+USE_THOUSAND_SEPARATOR = True
+
 # Email Settings
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
@@ -145,21 +157,6 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
-
-SITE_ID = 1
-
-if 'DEVELOPMENT' in os.environ:
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-    DEFAULT_FROM_EMAIL = "Corona Virus Forum team <noreply@coronaforum.com>"
-else:
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_USE_TLS = True
-    EMAIL_HOST = "smtp.gmail.com"
-    EMAIL_PORT = 587
-    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER_CK")
-    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD_CK")
-    DEFAULT_FROM_EMAIL = os.environ.get("EMAIL_HOST_USER_CK")
-
 
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/"
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/"
@@ -181,8 +178,8 @@ WSGI_APPLICATION = "coronavirus.wsgi.application"
 CSRF_TRUSTED_ORIGINS = [
     "https://8000-magenta-raven-g5b6gq55.ws-eu29.gitpod.io",
 ]
-# to put comma's in numbers by 1000
-USE_THOUSAND_SEPARATOR = True
+
+
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -197,6 +194,7 @@ else:
             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -268,3 +266,16 @@ if "USE_AWS" in os.environ:
     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+#Email backend
+if 'DEVELOPMENT' in os.environ:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    DEFAULT_FROM_EMAIL = "Corona Virus Forum team <noreply@coronaforum.com>"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER_CK")
+    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD_CK")
+    DEFAULT_FROM_EMAIL = os.environ.get("EMAIL_HOST_USER_CK")
