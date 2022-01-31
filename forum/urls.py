@@ -29,5 +29,6 @@ urlpatterns = [
          name="search"),
     path("govukdata/", views.apiview,
          name="govukdata"),
-
+    path("aboutus/", views.AboutUsView,
+         name="aboutus"),
 ]

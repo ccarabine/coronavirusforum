@@ -372,3 +372,7 @@ def apiview(request):
     except Exception as e:
         context = {'e': e}
         return render(request, '500error.html', context)
+
+
+def AboutUsView(request):
+        return render(request, 'aboutus.html')
