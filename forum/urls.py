@@ -33,4 +33,6 @@ urlpatterns = [
          name="aboutus"),
     path("talkguidelines/", views.TalkGuideLinesView,
          name="talkguidelines"),
+    path("privacypolicy/", views.PrivacyView,
+         name="privacypolicy"),
 ]

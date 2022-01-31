@@ -375,7 +375,10 @@ def apiview(request):
 
 
 def AboutUsView(request):
-        return render(request, 'aboutus.html')
+    return render(request, 'aboutus.html')
 
 def TalkGuideLinesView(request):
-        return render(request, 'talkguidelines.html')
+    return render(request, 'talkguidelines.html')
+
+def PrivacyView(request):
+    return render(request, 'privacypolicy.html')
