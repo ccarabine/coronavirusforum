@@ -31,4 +31,6 @@ urlpatterns = [
          name="govukdata"),
     path("aboutus/", views.AboutUsView,
          name="aboutus"),
+    path("talkguidelines/", views.TalkGuideLinesView,
+         name="talkguidelines"),
 ]
