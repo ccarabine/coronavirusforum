@@ -1,0 +1,385 @@
+/* --- resets styling attributes --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* padding and border are included in the width and height*/
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  }
+main {
+  flex-grow: 1;
+  }
+
+/* --- color variables --- */
+:root {
+  /* CSS HEX */
+  --color-caribbean-green: #26c585ff;
+  --color-maximum-blue: #44b2cdff;
+  --color-skobeloff: #196366ff;
+  --color-rich-black-fogra-29: #01030fff;
+  --color-maximum-blue-2: #44b2cdff;
+  --color-white: white;
+  --color-background-comment: #caced1;
+
+  --color-nav: #58595b;
+  --color-text-button: #000000;
+}
+
+/* --- color styling --- */
+.background-color-main {
+  background-color: var(--color-maximum-blue-2);
+}
+
+.header-title-color {
+  background-color: var(--color-skobeloff);
+  color: var(--color-white);
+}
+
+.post-color {
+  color: var(--color-rich-black-fogra-29);
+  background-color: var(--color-white);
+}
+
+.post-details-color {
+  color: var(--color-skobeloff);
+  background-color: var(--color-white);
+}
+
+.comment-box-color {
+  color: var(--color-rich-black-fogra-29);
+  background-color: var(--color-background-comment);
+}
+
+.nav-color {
+  color: var(--color-nav);
+  background-color: var(-color-rich-black-fogra-29);
+}
+
+/* --- Header styling --- */
+.header-style {
+  border-style: double;
+  padding: 10px;
+
+}
+a.header-links:hover {
+  text-decoration: underline;
+  color: var(--color-white);
+  cursor: pointer;
+
+}
+
+.header-paragraph {
+  border-style: double;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.1em;
+  padding-right: 40px;
+  padding-left: 40px;
+  font-weight: bold;
+}
+
+/* --- Post link styling --- */
+/* visited link */
+.card-links {
+  color: var(--color-rich-black-fogra-29);
+}
+
+a.card-links:visited {
+  color: var(--color-rich-black-fogra-29);
+}
+
+a.card-links:hover {
+  text-decoration: underline;
+  color: var(--color-rich-black-fogra-29);
+}
+
+.card-post:hover {
+  transform: scale(1.01);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+
+
+
+/* Make the image fully responsive */
+.carousel-inner img {
+  width: 550px;
+  height: 250px;
+}
+
+.img-container {
+  overflow: none;
+  width: 8rem;
+
+}
+.img-size{
+width:120px;
+}
+
+/* --- Post card styling --- */
+.card {
+  border: none
+}
+
+.card-body {
+  padding: 0px
+}
+
+/* --- Pagination --- */
+.pagination {
+  margin-top: 5px;
+  font-size: 1em;
+
+}
+
+.page-link {
+  color: var(--color-rich-black-fogra-29);
+}
+
+.page-item.active .page-link {
+  background-color: var(--color-skobeloff);
+  color: var(--color-white);
+}
+
+.post-border {
+  border-style: solid;
+  padding: 3px;
+}
+
+/* --- Form styling --- */
+.asteriskField {
+  display: none;
+}
+
+.checkbox-lg {
+  padding-top: 5px;
+  font-size: 1.2em;
+}
+
+/* --- Social media styling --- */
+/* Code used from  https://codepen.io/ephs23/pen/NeQZGx */
+footer ul {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+footer ul li {
+  list-style: none;
+}
+
+footer ul li a {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 35px;
+  font-size: 17.5px;
+  margin: 0 10px;
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #fff;
+  z-index: 1;
+}
+
+footer ul li a .icon {
+  position: relative;
+  color: #262626;
+  transition: .5s;
+  z-index: 3;
+}
+
+footer ul li a:hover .icon {
+  color: #fff;
+  transform: rotateY(360deg);
+}
+
+footer ul li a:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f00;
+  transition: .5s;
+  z-index: 2;
+}
+
+footer ul li a:hover:before {
+  top: 0;
+}
+
+footer ul li:nth-child(1) a:before {
+  background: #3b5999;
+}
+
+footer ul li:nth-child(2) a:before {
+  background: #55acee;
+}
+
+footer ul li:nth-child(3) a:before {
+  background: #C13584;
+}
+
+/* --- Google button --- */
+.btn-google {
+
+  box-shadow: 0 1px 2px 1px #ddd;
+  border-radius: 2px;
+  font-size: 15px;
+
+  cursor: pointer
+}
+
+.btn-facebook {
+  color: white;
+  background-color: #3b5998;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.btn-social {
+  position: relative;
+  padding-left: 44px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-social:hover {
+  color: #eee;
+}
+
+.btn-social :first-child {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  padding: 7px;
+  font-size: 1.6em;
+  text-align: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.2)
+}
+
+.form-border {
+  margin-bottom: 15px;
+  background: #f7f7f7;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+}
+
+.login-form h2 {
+  margin: 0 0 15px;
+}
+
+.or-seperator {
+  margin-top: 20px;
+  text-align: center;
+  border-top: 1px solid #ccc;
+}
+
+.or-seperator i {
+  padding: 0 10px;
+  background: #f7f7f7;
+  position: relative;
+  top: -11px;
+  z-index: 1;
+}
+
+/* --- Footer styling --- */
+/* visited link */
+.ft-links a {
+  color: var(--color-white);
+}
+
+.ft-links a:visited {
+  color: var(--color-white);
+}
+
+.ft-links a:hover {
+  text-decoration: underline;
+}
+
+.ft-links a:active {
+  color: var(--color-white);
+}
+
+.ft-center {
+  text-align: center;
+}
+
+/* --- voting thumbs --- */
+.hide {
+  display: none;
+}
+
+.active {
+  color: var(--color-caribbean-green)
+}
+
+.not-active {
+  color: var(--color-skobeloff);
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.fa,
+.fab,
+.fad,
+.fal,
+.far,
+.fas {
+  line-height: 1.5;
+}
+
+/* --- General helper styling --- */
+.mar-right {
+  margin-right: 10px;
+}
+
+/* --- Navbar styling --- */
+.navbar .navbar-toggler {
+  border: 0;
+}
+
+.text-area {
+  height: 20em;
+}
+
+.btn-border-none{
+  border:none
+}
+
+.center {
+  text-align: center;
+}
+
+@media screen and (max-width: 725px) {
+
+  .carousel-inner img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .header-paragraph {
+
+    font-size: 1em;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+
+  }
+}
