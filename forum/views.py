@@ -21,11 +21,11 @@ from .forms import PostForm, CommentForm
 
 
 def error_404_view(request, exception):
-    return render(request, '404error.html')
+    return render(request, '404error.html',status=404)
 
 
 def error_500_view(request):
-    return render(request, '500error.html')
+    return render(request, '500error.html', status=500)
 
 
 class PostListHomeView(ListView):
@@ -79,7 +79,6 @@ class PostDetailView(DetailView):
         if self.request.user in post.votes.all():
             voted = True
             upvoted = Vote.objects.get(post=post, user=self.request.user).vote
-
         context["page"] = page
         context["paginator"] = paginator
         context["object_list"] = context["paginator"].get_page(context["page"])
@@ -176,7 +175,6 @@ def VoteView(request, pk):
                 update.save()
                 update.refresh_from_db()
                 q.delete()
-
             # Existing user has an upvote, selected downvote
             if downVote == 'on':
                 update.upvote = F('upvote') - 1
