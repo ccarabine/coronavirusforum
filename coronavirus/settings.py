@@ -13,10 +13,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 # Imports
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 3rd party:
+from django.contrib.messages import constants as messages
 from pathlib import Path
 import os
 import dj_database_url
-from django.contrib.messages import constants as messages
 
 # Internal:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
