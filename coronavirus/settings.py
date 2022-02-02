@@ -36,7 +36,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ["coronavirusforum.herokuapp.com", "localhost"]
@@ -176,7 +176,7 @@ MESSAGE_TAGS = {
 WSGI_APPLICATION = "coronavirus.wsgi.application"
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://8000-magenta-raven-g5b6gq55.ws-eu29.gitpod.io",
+    "https://8000-magenta-raven-g5b6gq55.ws-eu30.gitpod.io",
 ]
 
 

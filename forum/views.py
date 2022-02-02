@@ -1,34 +1,61 @@
-from django.views.generic import ListView, DetailView, UpdateView
-from django.views.generic import DeleteView, CreateView
-from django.template.defaultfilters import slugify
-from django.shortcuts import render, get_object_or_404, reverse, redirect
-from django.contrib.messages.views import SuccessMessageMixin
+# Imports
+# 3rd party:
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
-
-from django.urls import reverse_lazy
-from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import F, Q
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.template.defaultfilters import slugify
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import DeleteView, CreateView
 
-from requests import get
 from json import dumps
+from requests import get
 
-from .models import Post, Topic, Comment, Vote
+# Internal:
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 from .forms import PostForm, CommentForm
+from .models import Post, Topic, Comment, Vote
 
 
 def error_404_view(request, exception):
-    return render(request, '404error.html',status=404)
+    """
+    A view to render 404 error page if the user goes to a non-exist url
+    Args:
+        request (object): HTTP request object.
+        exception: exception error
+    Returns:
+        Render 404error page
+    """
+    return render(request, '404error.html', status=404)
 
 
 def error_500_view(request):
+    """
+    A view to render 500 error page if there is a server error such
+    as the api failing
+    Args:
+        request (object): HTTP request object.
+    Returns:
+        Render 500error page
+    """
     return render(request, '500error.html', status=500)
 
 
 class PostListHomeView(ListView):
+    """
+    A view to show 5 lastest posts ordered by created
+    Args:
+        ListView: class based view
+    Returns:
+        Render of home page with context
+    """
     model = Post
     queryset = Post.objects.order_by("-created")[:5]
     template_name = "index.html"
@@ -36,7 +63,13 @@ class PostListHomeView(ListView):
 
 
 class PostListView(ListView):
-
+    """
+    A view to show 5 lastest posts filtered by topic
+    Args:
+        ListView: class based view
+    Returns:
+        Render of post list with context
+    """
     template_name = "postlist.html"
     context_object_name = "post_list"
     paginate_by = 5
@@ -51,7 +84,14 @@ class PostListView(ListView):
         return context
 
 
-def topic_list(request):  # gets the topic list for the navbar
+def topic_list(request):
+    """
+    A view to show the topic list for the navbar
+    Args:
+        request (object): HTTP request object.
+    Returns:
+        context
+    """
     topic_list = Topic.objects.exclude(name="default")
     context = {
         "topic_list": topic_list,
@@ -60,6 +100,15 @@ def topic_list(request):  # gets the topic list for the navbar
 
 
 class PostDetailView(DetailView):
+    """
+    A view to show individual post, detail
+    paginates 5 comments per page
+    Update the variables, whether the user has voted and if they have upvoted
+    Args:
+        DetailView: class based view
+    Returns:
+        Render of post detail with context
+    """
     model = Post
     template_name = "postdetail.html"
 
@@ -86,13 +135,21 @@ class PostDetailView(DetailView):
         context["post"] = post
         context["comments"] = comments
         context["form"] = form
-
         context["voted"] = voted
         context["upvoted"] = upvoted
         return context
 
 
+@login_required
 def addPost(request, topic):
+    """
+    A view to add a post, redirects to the post when submitted
+    Args:
+        request (object): HTTP request object.
+        topic: topic
+    Returns:
+        Render of post form with context
+    """
     form = PostForm()
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
@@ -112,43 +169,105 @@ def addPost(request, topic):
     return render(request, "postform.html", context)
 
 
+@method_decorator(login_required, name='dispatch')
 class UpdatePostView(SuccessMessageMixin, UpdateView):
+    """
+    A view to edit a post
+    Args:
+        SuccessMessageMixin: SuccessMessageMixin (success message attribute)
+        UpdateView: class based view
+    Returns:
+        Render of update post with success message
+    """
     model = Post
     form_class = PostForm
     template_name = "updatepost.html"
     success_message = "Post updated"
 
 
+@method_decorator(login_required, name='dispatch')
 class DeletePostView(SuccessMessageMixin, DeleteView):
+    """
+    A view to delete a post
+    Args:
+        SuccessMessageMixin: SuccessMessageMixin (success message attribute)
+        DeleteView: class based view
+    Returns:
+        Render of delete post with success message
+    """
     model = Post
     template_name = "deletepost.html"
     success_url = reverse_lazy("home")
     success_message = "Post deleted"
 
 
+@method_decorator(login_required, name='dispatch')
 class AddCommentView(SuccessMessageMixin, CreateView):
+    """
+    A view to add a comment
+    Args:
+        SuccessMessageMixin: SuccessMessageMixin (success message attribute)
+        CreateView: class based view
+    Returns:
+        Render of comment form with success message and context
+    """
     model = Comment
     form_class = CommentForm
     template_name = "commentform.html"
     success_message = "Comment added"
 
     def form_valid(self, form):
+        """
+        Set the post id and name to self instances
+        Returns form
+        Args:
+            self (object): self.
+            form (object): form.
+        Returns:
+            The form
+        """
         form.instance.post_id = self.kwargs["pk"]
         form.instance.name = self.request.user.username
         return super().form_valid(form)
 
-    def get_context_data(self, **kwargs):  # Get the post
+    def get_context_data(self, **kwargs):
+        """
+        Gets the post, returns context
+        Args:
+            self (object): Self object
+            **kwargs: **kwargs
+        Returns:
+            Context
+        """
         post = get_object_or_404(Post, pk=self.kwargs["pk"])
         kwargs["post"] = post
         return super().get_context_data(**kwargs)
 
 
 def email_success(request):
+    """
+    After receiving and interpreting a request message,
+    a server responds with the HTTP response message.
+    Args:
+       request (object): HTTP request object.
+    Returns:
+       HttpResponse
+    """
     res = "Email is verified!"
     return HttpResponse("<p>%s</p>" % res)
 
 
+@login_required
 def VoteView(request, pk):
+    """
+   A view to add, edit and remove a vote
+   redirects to the same post they are on
+    Args:
+       request (object): HTTP request object.
+       pk:pk
+    Returns:
+       Render postdetail page
+    """
     # get the post id from the form submit
     post = get_object_or_404(Post, pk=pk)
     id = post.id
@@ -230,6 +349,16 @@ def VoteView(request, pk):
 
 @login_required
 def ContactUsReportView(request, slug):
+    """
+    Sends email -contact us form fields to admin or prints to the terminal
+    in development
+    Prepopulates email and username
+    Args:
+       request (object): HTTP request object.
+       slug: slug
+    Returns:
+       Render contact us page  with context
+    """
     email = request.user.email
     username = request.user.username
 
@@ -252,6 +381,14 @@ def ContactUsReportView(request, slug):
 
 
 def ContactUsView(request):
+    """
+    Sends email -contact us form fields to admin or prints to the terminal
+    in development
+    Args:
+       request (object): HTTP request object.
+    Returns:
+       Render contact us page
+    """
     username = request.user.username
     if request.method == "POST":
         message_subject = request.POST['message-subject']
@@ -268,17 +405,30 @@ def ContactUsView(request):
         return render(request, 'contactus.html',
                       {'username': username})
     else:
-       
         return render(request, 'contactus.html', {})
 
-    
+
 class SearchPostsView(ListView):
+    """
+    Search post model title field with the query and paginate by 5 posts
+    Args:
+      ListView: Class based view
+    Returns:
+       Render postlist page
+    """
     model = Post
     template_name = "postlist.html"
     context_object_name = "post_list"
     paginate_by = 5
 
     def get_queryset(self):  # get all the posts by query
+        """
+        Filters the post by the query
+        Args:
+            self (object): Self object
+        Returns:
+            object_list: object_list
+        """
         query = self.request.GET.get('q')
         if query:
             object_list = self.model.objects.filter(title__icontains=query)
@@ -287,6 +437,14 @@ class SearchPostsView(ListView):
         return object_list
 
     def get_context_data(self, **kwargs):
+        """
+        Gets the post, returns context
+        Args:
+            self (object): Self object
+            **kwargs: **kwargs
+        Returns:
+            Context
+        """
         context = super().get_context_data(**kwargs)
         context["query"] = self.request.GET.get('q')
         return context
@@ -295,6 +453,18 @@ class SearchPostsView(ListView):
 # "ENDPOINT and response code taken from
 # https://coronavirus.data.gov.uk/details/developers-guide/main-api"
 def apiview(request):
+    """
+    Try:
+        gets the endpoint, filters by area type and name, structures the data
+        puts the response into json
+        put min and max dates into variables into the context
+        gets the data for selected date
+        returns govuk data page with context
+    Except:
+        return 500 error page
+    Args:
+      request (object): HTTP request object.
+    """
     try:
         ENDPOINT = "https://api.coronavirus.data.gov.uk/v1/data"
         AREA_TYPE = "nation"
@@ -367,16 +537,38 @@ def apiview(request):
                    'selecteddate': selecteddate
                    }
         return render(request, 'govukdata.html', context)
-    except Exception as e:
-        context = {'e': e}
-        return render(request, '500error.html', context)
+    except Exception:
+        return render(request, '500error.html')
 
 
 def AboutUsView(request):
+    """
+    Renders the about us page
+    Args:
+        request (object): HTTP request object.
+    Returns:
+        render about us page
+    """
     return render(request, 'aboutus.html')
 
+
 def TalkGuideLinesView(request):
+    """
+    Renders the talkguidelines page
+    Args:
+        request (object): HTTP request object.
+    Returns:
+        render talkguidelines page
+    """
     return render(request, 'talkguidelines.html')
 
+
 def PrivacyView(request):
+    """
+    Renders the privacy page
+    Args:
+        request (object): HTTP request object.
+    Returns:
+        render privacy page
+    """
     return render(request, 'privacypolicy.html')
