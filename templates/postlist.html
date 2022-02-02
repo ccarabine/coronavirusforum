@@ -30,6 +30,9 @@
                 </a>
                 <hr>
                 <div class="post-details-color">
+                    {% if post.enable_voting %}
+                        <strong>VOTE</strong>
+                    {% endif %}
                     <i class="far fa-comment"></i>
                     <span class="mr-1">{{post.comment_post.count}} </span>
                     <span class="mr-2"> Posted by {{post.user_name}}</span>
