@@ -26,7 +26,6 @@
                 </div>
             </form>
         </div>
-
         <!-- My account -->
         <div class="col-12 col-md-3 my-auto py-1 py-lg-0">
             <ul class="list-inline list-unstyled text-center text-lg-right my-0">
@@ -37,7 +36,7 @@
                             <div>
                                 <i class="fas fa-user fa-lg nav-color"></i>
                             </div>
-                            <p class="my-0 nav-color">My Account</p>
+                            <p class="my-0 nav-color">{% if user.username %}Welcome {{user.username}}{% else %}Sign in{% endif %}</p>
                         </div>
                     </a>
                     <div class="dropdown-menu border-0" aria-labelledby="user-options">
