@@ -164,6 +164,7 @@ def addPost(request, topic):
             post.post_image = request.FILES.get("post_image")
             post.owner = request.user
             post.save()
+            messages.success(request, 'Post submitted')
             return redirect(reverse("postdetail", args=[post.id]))
     context = {"form": form, "topic": topic}
     return render(request, "postform.html", context)
@@ -294,6 +295,7 @@ def VoteView(request, pk):
                 update.save()
                 update.refresh_from_db()
                 q.delete()
+                messages.success(request, 'Thumbs Up deselected')
             # Existing user has an upvote, selected downvote
             if downVote == 'on':
                 update.upvote = F('upvote') - 1
@@ -302,6 +304,7 @@ def VoteView(request, pk):
                 q.vote = False
                 q.save(update_fields=['vote'])
                 update.refresh_from_db()
+                messages.success(request, 'Thumbs Down selected')
         else:
             # existing user has an downvote, selected upvote
             if upVote == 'on':
@@ -313,6 +316,7 @@ def VoteView(request, pk):
                 q.vote = True
                 q.save(update_fields=['vote'])
                 update.refresh_from_db()
+                messages.success(request, 'Thumbs Up selected')
 
             # User has an exisiting downvote, De-selected downvote
             # User has not voted
@@ -322,6 +326,7 @@ def VoteView(request, pk):
                 update.save()
                 update.refresh_from_db()
                 q.delete()
+                messages.success(request, ' Thumbs Down deselected')
     else:
         # user has not voted - new vote - selected upvote
         if upVote == 'on':
@@ -332,12 +337,13 @@ def VoteView(request, pk):
             # Add new vote
             new = Vote(post_id=id, user_id=request.user.id, vote=True)
             new.save()
+            messages.success(request, 'Thumbs Up selected')
         else:
             # user has not voted - new vote - selected downvote
             update.downvote = F('downvote') + 1
             update.votes.add(request.user)
             update.save()
-
+            messages.success(request, 'Thumbs down selected')
             # Add new vote
             new = Vote(post_id=id, user_id=request.user.id, vote=False)
             new.save()
