@@ -8,14 +8,14 @@
         </li>
         <li class="nav-item dropdown">
             <a class="logo-font font-weight-bold nav-link nav-color mr-5" href="#" id="topics-link"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"aria-label="Topic">
                 TOPICS {{ topic.name }}
             </a>
 
             <div class="dropdown-menu border-0" aria-labelledby="topic-links">
 
                 {% for topic in topic_list %}
-                <a href="/topic/{{ topic.name }}" class="dropdown-item nav-color">{{ topic.name }}
+                <a href="/topic/{{ topic.name }}" class="dropdown-item nav-color" aria-label="{{ topic.name }}">{{ topic.name }}
                 </a>
                 {% endfor %}
 
@@ -23,12 +23,12 @@
 
         </li>
         <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link nav-color mr-5" href="{% url 'govukdata' %}">
+            <a class="logo-font font-weight-bold nav-link nav-color mr-5" href="{% url 'govukdata' %}" aria-label=" latest statics">
                 LATEST STATISTICS
             </a>
         </li>
         <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link nav-color mr-5" href="{% url 'aboutus' %}">
+            <a class="logo-font font-weight-bold nav-link nav-color mr-5" href="{% url 'aboutus' %}" aria-label=" about us">
                 ABOUT US
             </a>
         </li>

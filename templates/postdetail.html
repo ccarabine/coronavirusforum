@@ -12,106 +12,100 @@
             <small>{{ post.body | safe }}</small>
             <div class="img-container img-fluid">
                 {% if post.post_image %}
-                <a href="{% url 'postdetail' post.id %}">
-                    <img src="{{ post.post_image.url }}" class="card-img-top mt-2 img-fluid img-thumbnail card-links"
-                        alt="{{ post.name }}">
-                </a>
+                    <a href="{% url 'postdetail' post.id %}">
+                        <img src="{{ post.post_image.url }}" class="card-img-top mt-2 img-fluid img-thumbnail card-links"
+                            alt="{{ post.name }}" aria-label="post image">
+                    </a>
                 {% endif %}
             </div>
             <div class="d-flex justify-content-start post-details-color mt-3">
                 {% if user.is_authenticated %}
-                <!--user logged-->
-                <div class="row">
-                    <div class="col">
-                        <form action="{% url 'vote' post.pk %}" method="POST" id="voteForm">
-                            {% csrf_token %}
-                            {% if post.enable_voting %}
-                            <!--Enabled voting true, display thumbs and allow user to vote-->
-                            <span>{{post.upvote}}</span>
-                            <i class="fas fa-thumbs-up mr-2 cursor
-                            {% if voted and upvoted %}
-                                active
-                            {% else %}
-                                not-active
-                            {% endif %}" id="upThumb"></i>
-                            <input type="checkbox" class="hide" name="upVote" id="upVote" unchecked>
-                            <span>{{post.downvote}}</span>
-                            <i class="fas fa-thumbs-down mr-3 cursor
-                                {% if voted and not upvoted %}
-                                    active
-                                {% else %}
-                                not-active
-                                {% endif %}" id="downThumb"></i>
-                            <input type="checkbox" class="hide" name="downVote" id="downVote" unchecked>
-                            <Button type="submit" class="hide"></Button>
-                            <i class="far fa-comment"></i>
-                            <span class="mr-1">{{post.comment_post.count}} </span>
-                            <span class="mr-2"> Posted by {{post.user_name}}</span>
-                            <span class="mr-2"> Created {{post.created|timesince }} ago</span>
-                            {% else %}
-                            <!--logged in, enabled voting false. no thumbs shown, display comments-->
-                            <i class="far fa-comment"></i>
-                            <span class="mr-1">{{post.comment_post.count}} </span>
-                            <span class="mr-2"> Posted by {{post.user_name}}</span>
-                            <span class="mr-2"> Created {{post.created|timesince }} ago</span>
-                            {% endif %}
-                        </form>
-                    </div>
-                </div>
-                {% else %}
-
-                <!--user not logged in, display thumbs, number of comments and when created-->
-                <div class="container pl-1">
-                    <div class="row post-details-color">
-                        <div class="col">
-                            <span>{{post.upvote}}<i class="fas fa-thumbs-up mr-2 ml-1 "></i></span>
-                            <span>{{post.downvote}}<i class="fas fa-thumbs-down mr-3 ml-1"></i></span>
-                            <i class="far fa-comment mr-1"></i>
-                            <span class="mr-1">{{post.comment_post.count}} </span>
-                            <span class="mr-2"> Posted by {{post.user_name}}</span>
-                            <span class="mr-2"> Created {{post.created|timesince }} ago</span>
-                        </div>
-                    </div>
+                    <!--user logged-->
                     <div class="row">
                         <div class="col">
-                            <small><a href="{% url 'account_login' %}" class="card-links">Sign In to vote</a>
-                            </small>
-                            {% endif %}
+                            <form action="{% url 'vote' post.pk %}" method="POST" id="voteForm">
+                                {% csrf_token %}
+                                {% if post.enable_voting %}
+                                    <!--Enabled voting true, display thumbs and allow user to vote-->
+                                    <span>{{post.upvote}}</span>
+                                    <i class="fas fa-thumbs-up mr-2 cursor
+                                    {% if voted and upvoted %}
+                                        active
+                                    {% else %}
+                                        not-active
+                                    {% endif %}" id="upThumb"></i>
+                                    <input type="checkbox" class="hide" name="upVote" id="upVote" unchecked>
+                                    <span>{{post.downvote}}</span>
+                                    <i class="fas fa-thumbs-down mr-3 cursor
+                                        {% if voted and not upvoted %}
+                                            active
+                                        {% else %}
+                                        not-active
+                                        {% endif %}" id="downThumb"></i>
+                                    <input type="checkbox" class="hide" name="downVote" id="downVote" unchecked>
+                                    <Button type="submit" class="hide"></Button>
+                                    <i class="far fa-comment"></i>
+                                    <span class="mr-1">{{post.comment_post.count}} </span>
+                                    <span class="mr-2"> Posted by {{post.user_name}}</span>
+                                    <span class="mr-2"> Created {{post.created|timesince }} ago</span>
+                                {% else %}
+                                    <!--logged in, enabled voting false. no thumbs shown, display comments-->
+                                    <i class="far fa-comment"></i>
+                                    <span class="mr-1">{{post.comment_post.count}} </span>
+                                    <span class="mr-2"> Posted by {{post.user_name}}</span>
+                                    <span class="mr-2"> Created {{post.created|timesince }} ago</span>
+                                {% endif %}
+                            </form>
                         </div>
-
-                        {% if user.is_authenticated %}
-                        {% if user.id == post.owner.id %}
-                        <small>
-                            <a href="{% url 'updatepost' post.pk %}" class="card-links mr-1"> Update</a>
-                            <a href="{% url 'deletepost' post.pk %}" class="card-links mr-1"> Delete</a>
-                        </small>
-                        {% endif %}
-                        {% endif %}
-                        {% if user.is_authenticated %}
-                        <small>
-                            <a href="{% url 'contactus_report' post.slug %}" class="card-links mr-1">Report post</a>
-                        </small>
-                        {% endif %}
                     </div>
-
-
-                    <hr class="mx-2">
-
-                    {% if not post.comment_post.all %}
-                    <span class="mb-2">No Comments Yet..
-                        {% if user.is_authenticated %}
-                        <a href="{% url 'addcomment' post.pk %}" class="card-links ml-2">Add one</a>
-                        {% endif %}
-                    </span>
-                    {% else %}
-
-                    <h4 class="title-bar ml-3 ">Comments...</h4>
-                    {% if user.is_authenticated %}
-                    <small class="mb-2 ml-3">
-                        <a href="{% url 'addcomment' post.pk %}" class="card-links"> Add comment</a>
-                    </small>
+                {% else %}
+                    <!--user not logged in, display thumbs, number of comments and when created-->
+                    <div class="container pl-1">
+                        <div class="row post-details-color">
+                            <div class="col">
+                                <span>{{post.upvote}}<i class="fas fa-thumbs-up mr-2 ml-1 "></i></span>
+                                <span>{{post.downvote}}<i class="fas fa-thumbs-down mr-3 ml-1"></i></span>
+                                <i class="far fa-comment mr-1"></i>
+                                <span class="mr-1">{{post.comment_post.count}} </span>
+                                <span class="mr-2"> Posted by {{post.user_name}}</span>
+                                <span class="mr-2"> Created {{post.created|timesince }} ago</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <small><a href="{% url 'account_login' %}" class="card-links" aria-label="sign in to vote link">Sign In to vote</a>
+                                </small>
+                        </div>
+                {% endif %}       
+                {% if user.is_authenticated %}
+                    {% if user.id == post.owner.id %}
+                        <small>
+                            <a href="{% url 'updatepost' post.pk %}" class="card-links mr-1" aria-label="update post link"> Update</a>
+                            <a href="{% url 'deletepost' post.pk %}" class="card-links mr-1" aria-label="delete post link"> Delete</a>
+                        </small>
                     {% endif %}
-                    {% for comment in page_obj %}
+                    <small>
+                        <a href="{% url 'contactus_report' post.slug %}" class="card-links mr-1" aria-label="delete post link">Report post</a>
+                    </small>
+                {% endif %}
+            </div>
+
+            <!--Comments section-->
+            <hr class="mx-2">
+            {% if not post.comment_post.all %}
+                <span class="mb-2">No Comments Yet..
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'addcomment' post.pk %}" class="card-links ml-2" aria-label="Add a comment link">Add one</a>
+                    {% endif %}
+                </span>
+            {% else %}
+                <h4 class="title-bar ml-3 ">Comments...</h4>
+                {% if user.is_authenticated %}
+                    <small class="mb-2 ml-3">
+                        <a href="{% url 'addcomment' post.pk %}" class="card-links" aria-label="add a comment link"> Add comment</a>
+                    </small>
+                {% endif %}
+                {% for comment in page_obj %}
                     <div class="card col-lg-10 col-md-8 ">
                         <div class="card-body px-2 pt-2 rounded comment-box-color bg-gradient-light">
                             <h6 class="font-weight-bold"> {{ comment.name | title }}</h6>
@@ -122,13 +116,11 @@
                             <hr class="mx-2">
                         </small>
                     </div>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
+                {% endfor %}
+            {% endif %}     
         </div>
     </div>
-
-    {% include 'pagination.html' %}
 </div>
+{% include 'pagination.html' %}
+
 {% endblock %}

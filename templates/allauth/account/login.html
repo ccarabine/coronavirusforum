@@ -15,9 +15,9 @@
       {% csrf_token %}
       {{ form|crispy }}
       {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
-      <a class="Action card-links" href="{% url 'account_reset_password' %}">
+        <a class="Action card-links" href="{% url 'account_reset_password' %}">
         {% trans "Forgot Password?" %}</a>
       <button class="btn btn-secondary ml-3 pl-5 pr-5 mb-2" type="submit">
         {% trans "Sign In" %}</button>
@@ -26,25 +26,20 @@
     {% get_providers as socialaccount_providers %}
 
     {% if socialaccount_providers %}
-    <div class="or-seperator"><i>or</i></div>
-    <p class="text-center">
-      {% blocktrans with site.name as site_name %}Login with your social media account</p>
-
-    {% endblocktrans %}</p>
-
-    <div class="socialaccount_ballot">
-
-      <ul class="socialaccount_providers">
-        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-      </ul>
-    </div>
-
-    {% include "socialaccount/snippets/login_extra.html" %}
-
+      <div class="or-seperator"><i>or</i></div>
+      <p class="text-center">
+        {% blocktrans with site.name as site_name %}Login with your social media account</p>
+      {% endblocktrans %}</p>
+      <div class="socialaccount_ballot">
+        <ul class="socialaccount_providers">
+          {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+        </ul>
+      </div>
+      {% include "socialaccount/snippets/login_extra.html" %}
     {% else %}
-    <p>{% blocktrans %}If you have not created an account yet, then please
-      <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
-    </p>
+      <p>{% blocktrans %}If you have not created an account yet, then please
+        <a href="{{ signup_url }}" aria-label="Sign up">sign up</a> first.{% endblocktrans %}
+      </p>
     {% endif %}
 
   </div>

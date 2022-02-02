@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="container col-lg-8 col-md-10">
-  <h4 class="header-style header-title-color">{% trans "Register" %}</h4>
+  <h4 class="header-style header-title-color">{% trans "Sign up" %}</h4>
   <br>
   <div class="form-border">
 
@@ -18,7 +18,7 @@
       {% csrf_token %}
       {{ form|crispy }}
       {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
       <button class="btn btn-secondary" type="submit">{% trans "Sign Up" %}
         &raquo;</button>

@@ -5,37 +5,32 @@
 <div class="container col-lg-8 col-md-10">
     <h4 class="header-style header-title-color"> Contact us</h4>
     <div class="form-border">
-
         {% if username %}
-        <div>
-            <h2>Thanks {{ username }}</h2>
-            <p>We received your email and will respond shortly...</p>
-        </div>
-        <br /><br /><br />
-
+            <div>
+                <h2>Thanks {{ username }}</h2>
+                <p>We received your email and will respond shortly...</p>
+            </div>
+            <br /><br /><br />
         {% else %}
-
         <form class="mb2" method="post">
             {% csrf_token %}
             <div class="row">
-
                 {% if slug %}
-                <p class="col-lg-12">Thank you for reporting this post, we are very thankful for
-                    your support in helping us ensure The Coronavirus Forum is a safe and happy
-                    community, we take any safeguarding concerns very seriously </p>
-                <p class="col-lg-12">
-                    <input type="text" name="message-subject-display" value="Report post: {{ slug }}"
-                        class="form-control mb-30" placeholder="Subject">
-                </p>
+                    <p class="col-lg-12">Thank you for reporting this post, we are very thankful for
+                        your support in helping us ensure The Coronavirus Forum is a safe and happy
+                        community, we take any safeguarding concerns very seriously </p>
+                    <p class="col-lg-12">
+                        <input type="text" name="message-subject-display" value="Report post: {{ slug }}"
+                            class="form-control mb-30" placeholder="Subject">
+                    </p>
                 {% else %}
-                <p class="col-lg-12">We're always happy to answer questions and listen to
-                    your feedback and suggestions, so please do get in touch.</p>
-                <p class="col-lg-12">
-                    <input type="text" name="message-subject" class="form-control mb-30" 
-                    placeholder="Subject" required>
-                </p>
+                    <p class="col-lg-12">We're always happy to answer questions and listen to
+                        your feedback and suggestions, so please do get in touch.</p>
+                    <p class="col-lg-12">
+                        <input type="text" name="message-subject" class="form-control mb-30" 
+                        placeholder="Subject" required>
+                    </p>
                 {% endif %}
-
                 <p class="col-lg-12">
                     <input type="email" name="message-email" value="{{email}}" 
                     class="form-control mb-30" placeholder="Your Email" required>
@@ -47,12 +42,10 @@
                 <p class="col-12">
                     <button type="submit" class="btn btn-secondary">Send Message</button>
                 </p>
-
             </div>
         </form>
         {% endif %}
-
     </div>
 </div>
 
-{%endblock%}
+{% endblock %}
