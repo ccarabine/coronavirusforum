@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
 
     # providers
-    "allauth.socialaccount.providers.facebook",
     "allauth.socialaccount.providers.google",
 
     # Other
@@ -112,13 +111,6 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 
 SOCIALACCOUNT_PROVIDERS = {
-    "facebook": {
-        "METHOD": "oauth2",
-        "SCOPE": ["email"],
-        "AUTH_PARAMS": {"auth_type": "reauthenticate"},
-        "LOCALE_FUNC": lambda request: "en_US",
-        "VERSION": "v2.4",
-    },
     "google": {"SCOPE": ["email"], "AUTH_PARAMS": {"access_type": "online"}},
 }
 CRISPY_TEMPLATE_PACK = "bootstrap4"
