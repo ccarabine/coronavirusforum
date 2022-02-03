@@ -75,12 +75,12 @@ class PostListView(ListView):
     paginate_by = 5
 
     def get_queryset(self):  # get all the posts by topic
-        queryset = Post.objects.filter(topic__name=self.kwargs["topic"])
+        queryset = Post.objects.filter(topic__slug=self.kwargs["topic"])
         return queryset
 
     def get_context_data(self, **kwargs):  # to get the topic selected
         context = super().get_context_data(**kwargs)
-        context["topic"] = self.kwargs["topic"]
+        context["topic"] = Topic.objects.get(slug=self.kwargs["topic"])
         return context
 
 

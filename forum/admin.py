@@ -6,8 +6,7 @@ from django_summernote.admin import SummernoteModelAdmin
 
 # Internal:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-from .models import Post, Comment, Vote
-from . import models
+from .models import Post, Comment, Vote, Topic
 
 
 @admin.register(Post)
@@ -64,4 +63,18 @@ class VoteAdmin(admin.ModelAdmin):
         )
 
 
-admin.site.register(models.Topic)
+@admin.register(Topic)
+class TopicAdmin(admin.ModelAdmin):
+    """
+    Admin class for the topic model.
+    """
+    prepopulated_fields = {
+        "slug": ("name",),
+        }
+    list_display = (
+        "name",
+        "slug"
+        )
+    search_fields = (
+        "name",
+        )

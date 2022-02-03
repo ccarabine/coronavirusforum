@@ -8,14 +8,14 @@
         </li>
         <li class="nav-item dropdown">
             <a class="logo-font font-weight-bold nav-link nav-color mr-5" href="#" id="topics-link"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"aria-label="Topic">
-                TOPICS {{ topic.name }}
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Topic">
+                TOPICS 
             </a>
 
-            <div class="dropdown-menu border-0" aria-labelledby="topic-links">
+            <div class="dropdown-menu border-0">
 
                 {% for topic in topic_list %}
-                <a href="/topic/{{ topic.name }}" class="dropdown-item nav-color" aria-label="{{ topic.name }}">{{ topic.name }}
+                <a href="/topic/{{ topic.slug }}" class="dropdown-item nav-color" aria-label="{{ topic.name }}">{{ topic.name }}
                 </a>
                 {% endfor %}
 

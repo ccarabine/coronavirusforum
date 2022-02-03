@@ -16,6 +16,13 @@ class Topic(models.Model):
         verbose_name=("name"),
         max_length=100
         )
+    slug = models.SlugField(
+        verbose_name=("slug"),
+        max_length=150,
+        unique=True,
+        null=True,
+        blank=True,
+        )
 
     def __str__(self):
         """
