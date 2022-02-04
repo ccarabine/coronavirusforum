@@ -185,7 +185,6 @@ class UpdatePostView(SuccessMessageMixin, UpdateView):
     template_name = "updatepost.html"
     success_message = "Post updated"
 
-
 @method_decorator(login_required, name='dispatch')
 class DeletePostView(SuccessMessageMixin, DeleteView):
     """
