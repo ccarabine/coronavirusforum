@@ -140,7 +140,6 @@ class PostDetailView(DetailView):
         return context
 
 
-@login_required
 def addPost(request, topic):
     """
     A view to add a post, redirects to the post when submitted
@@ -150,6 +149,10 @@ def addPost(request, topic):
     Returns:
         Render of post form with context
     """
+    if not request.user.is_authenticated:
+        messages.error(
+            request, 'Sorry, only logged in users can create a post.')
+        return redirect(reverse('home'))
     form = PostForm()
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
@@ -184,6 +187,11 @@ class UpdatePostView(SuccessMessageMixin, UpdateView):
     form_class = PostForm
     template_name = "updatepost.html"
     success_message = "Post updated"
+
+    def get_queryset(self):
+        owner = self.request.user
+        return self.model.objects.filter(owner=owner)
+
 
 @method_decorator(login_required, name='dispatch')
 class DeletePostView(SuccessMessageMixin, DeleteView):
