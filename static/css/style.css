@@ -370,6 +370,9 @@ footer ul li:nth-child(3) a:before {
   text-align: center;
 }
 
+.row{
+  margin-right: 0px;
+}
 @media screen and (max-width: 725px) {
 
   .carousel-inner img {
