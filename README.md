@@ -1,3 +1,25 @@
+Page | Wireframe | 
+------------ | ------------- 
+Home page| [Mobile](docs/images/wireframes/home.png)
+Home page with navbar| [Desktop/Tablet] (docs/images/wireframes/home_mediumplus_devices.png)
+Navbar| [Mobile] (docs/images/wireframes/navbar_menu.png)
+Search | [Desktop/Tablet/Mobile] (docs/images/wireframes/search.png)
+Flash messages | [Desktop/Tablet/Mobile] (docs/images/wireframes/alert_flash_messages.png)
+
+account_login | [Desktop/Tablet/Mobile] (docs/images/wireframes/account_login.png)
+Sign up page | [Desktop/Tablet/Mobile] (docs/images/wireframes/account_register.png)
+View list of posts page | [Desktop/Tablet/Mobile] (docs/images/wireframes/view_post_list.png)
+New post page| [Desktop/Tablet/Mobile] (docs/images/wireframes/new_post.png)
+New comment page | [Desktop/Tablet/Mobile] (docs/images/wireframes/new_comment.png)
+Links for CRUD page| [Desktop/Tablet/Mobile] (docs/images/wireframes/read_update_delete_post,_add_comment_vote.png)
+
+API page | [Desktop/Tablet/Mobile] (docs/images/wireframes/api_page.png)
+Privacy policy page| [Desktop/Tablet/Mobile] (docs/images/wireframes/privacy_policy.png)
+Talk guide lines page | [Desktop/Tablet/Mobile] (docs/images/wireframes/talkguide_lines.png)
+About us page | [Desktop/Tablet/Mobile] (docs/images/wireframes/about.png)
+
+
+
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
 Welcome ccarabine,
