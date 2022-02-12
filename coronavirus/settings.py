@@ -108,7 +108,7 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-SITE_ID = 1
+SITE_ID = 2
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {"SCOPE": ["email"], "AUTH_PARAMS": {"access_type": "online"}},
@@ -168,7 +168,7 @@ MESSAGE_TAGS = {
 WSGI_APPLICATION = "coronavirus.wsgi.application"
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://8000-magenta-raven-g5b6gq55.ws-eu30.gitpod.io",
+    "https://8000-magenta-raven-g5b6gq55.ws-eu31.gitpod.io",
 ]
 
 
