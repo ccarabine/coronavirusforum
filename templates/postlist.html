@@ -22,7 +22,7 @@
     {% endif %}
    
     {% for post in post_list %}
-        <div class="card mb-2 mt-2 card-post {% if query %}container col-lg-8 col-md-10 {% endif %} ">
+        <div class="card mb-2 mt-2 card-post ">
             <a href=" {{ post.get_absolute_url }}"></a>
             <div class="card-body px-2 pt-2 rounded">
                 <a href="{% url 'postdetail' post.id %}" class="card-links" aria-label="Go to post">
