@@ -10,7 +10,7 @@
             {% csrf_token %}
             <div class="container">
                 <div class="row justify-content-center">
-                    <input type="date" class="mr-2" value="{{selecteddate}}" min="{{mindate}}" max="{{maxdate}}"
+                    <input type="date" aria-label="date" class="mr-2" value="{{selecteddate}}" min="{{mindate}}" max="{{maxdate}}"
                         name="selecteddate">
                     <button type="submit" class="btn btn-secondary" aria-label="Select date">Select date</button>
                     <br>

@@ -367,6 +367,14 @@ footer ul li:nth-child(3) a:before {
 .center {
   text-align: center;
 }
+a{
+  color:blue;
+}
+
+/* --- color styling --- */
+.background-color-main {
+  background-color: var(--color-maximum-blue-2);
+}
 
 .row{
   margin-right: 0px;
