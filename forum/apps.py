@@ -5,6 +5,7 @@ from django.apps import AppConfig
 # Internal:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
 class ForumConfig(AppConfig):
     """
     A class for configuring the forum app

@@ -10,7 +10,7 @@ from .forms import PostForm, CommentForm
 
 
 class TestPostForm(TestCase):
-    
+
     def test_post_title_is_required(self):
         """
         This test tests the field "title" is  required
@@ -54,7 +54,7 @@ class TestPostForm(TestCase):
 
 
 class TestCommentForm(TestCase):
-    
+
     def test_comment_body_is_required(self):
         """
         This test tests the field "comment_body" is  required
