@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+  {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 
@@ -14,7 +14,9 @@
       <p>{% blocktrans with provider.name as provider %}
         You are about to connect a new third party account from
         {{ provider}}.{% endblocktrans %}</p>
+    </div>
   {% else %}
+    <div class="form-border">   
       <h4 class="header-style header-title-color">
         {% blocktrans with provider.name as provider %}Sign In Via
         {{ provider }}{% endblocktrans %}</h4>
@@ -22,12 +24,13 @@
       <p>{% blocktrans with provider.name as provider %}
         You are about to sign in using a third party account from
         {{ provider }}.{% endblocktrans %}</p>
+    </div> 
   {% endif %}
 
   <form method="post">
     {% csrf_token %}
     <button class="btn btn-secondary mb-2" type="submit">{% trans "Continue" %}</button>
   </form>
-    </div>
+   
 </div>
 {% endblock %}

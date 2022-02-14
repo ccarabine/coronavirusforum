@@ -75,7 +75,9 @@
                             <div class="col">
                                 <small><a href="{% url 'account_login' %}" class="card-links" aria-label="sign in to vote link">Sign In to vote</a>
                                 </small>
+                            </div>
                         </div>
+                    </div>
                 {% endif %}       
                 {% if user.is_authenticated %}
                     {% if user.id == post.owner.id %}
@@ -113,8 +115,8 @@
                         </div>
                         <small class="title-bar ml-2 ">
                             {{ comment.created|timesince }} ago
-                            <hr class="mx-2">
                         </small>
+                        <hr class="mx-2">
                     </div>
                 {% endfor %}
             {% endif %}     

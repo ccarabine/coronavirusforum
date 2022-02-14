@@ -28,10 +28,10 @@
     {% if socialaccount_providers %}
       <div class="or-seperator"><i>or</i></div>
       <p class="text-center">
-        {% blocktrans with site.name as site_name %}Login with your social media account</p>
+        {% blocktrans with site.name as site_name %}Login with your social media account
       {% endblocktrans %}</p>
       <div class="socialaccount_ballot">
-        <ul class="socialaccount_providers">
+        <ul class="socialaccount_providers list-unstyled">
           {% include "socialaccount/snippets/provider_list.html" with process="login" %}
         </ul>
       </div>

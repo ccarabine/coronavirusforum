@@ -1,12 +1,23 @@
+
 {% load socialaccount %}
 
 {% get_providers as socialaccount_providers %}
 
-<div class="text-center">
-  <div><a alt="Google sign-in" href="/accounts/google/login/?process=login"
-      class="btn btn-danger btn-social btn-google pb-3 ">
-      <i class="fa fa-google"></i> 
-      <span class="">Sign in with Google </span></a>
-  </div>
-
-</div>
+{% for provider in socialaccount_providers %}
+{% if provider.id == "openid" %}
+{% for brand in provider.get_brands %}
+<li>
+  <a title="{{brand.name}}" 
+     class="socialaccount_provider {{provider.id}} {{brand.id}}" 
+     href="{% provider_login_url provider.id openid=brand.openid_url process=process %}"
+     >{{brand.name}}</a>
+</li>
+{% endfor %}
+{% endif %}
+<li class="text-center">
+  <a href="/accounts/google/login/?process=login"
+  class="btn btn-danger btn-social btn-google pb-3 ">
+  <i class="fa fa-google"></i> 
+  <span class="">Sign in with Google </span></a>
+</li>
+{% endfor %}
