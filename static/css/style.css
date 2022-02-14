@@ -59,7 +59,6 @@ main {
 
 .nav-color {
   color: var(--color-nav);
-  background-color: var(-color-rich-black-fogra-29);
 }
 
 /* --- Header styling --- */
@@ -124,10 +123,9 @@ a.card-links:hover {
 }
 
 .img-container {
-  overflow: none;
   width: 8rem;
-
 }
+
 .img-size{
 width:120px;
 }
