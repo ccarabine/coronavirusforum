@@ -168,7 +168,7 @@ MESSAGE_TAGS = {
 WSGI_APPLICATION = "coronavirus.wsgi.application"
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://8000-magenta-raven-g5b6gq55.ws-eu31.gitpod.io",
+    "https://8000-magenta-raven-g5b6gq55.ws-eu32.gitpod.io",
 ]
 
 

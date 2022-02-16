@@ -6,20 +6,24 @@
     {% if query %}
         <h4 class="header-style header-title-color"> Search: {{ query|title }}</h4>
     {% else %}
-        <h4 class="header-style header-title-color"> Topic: {{ topic }}</h4>
-        <div class="mb-2">
-            {% if user.is_authenticated %}
-                <div class="card mb-2 mt-2 card-post">
-                    <div class="card-body px-2 pt-2 rounded">
-                        <h6>
-                            <a href="{% url 'addpost' topic %}" class="post-color card-links" aria-label="Create a new post"> -> Start a new post within this
-                                topic</a>
-                        </h6>
+        {% if not topic %}
+            <h4 class="header-style header-title-color"> No search criteria </h4>
+        {% else %}
+            <h4 class="header-style header-title-color"> Topic: {{ topic }}</h4>
+            <div class="mb-2">
+                {% if user.is_authenticated %}
+                    <div class="card mb-2 mt-2 card-post">
+                        <div class="card-body px-2 pt-2 rounded">
+                            <h6>
+                                <a href="{% url 'addpost' topic %}" class="post-color card-links" aria-label="Create a new post"> -> Start a new post within this
+                                    topic</a>
+                            </h6>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
+            </div>
+        {% endif %}
             {% endif %}
-        </div>
-    {% endif %}
    
     {% for post in post_list %}
         <div class="card mb-2 mt-2 card-post ">

@@ -13,7 +13,8 @@
     </a>
     <div class="dropdown-menu border-0" aria-labelledby="user-options-mobile">
         {% if user.is_authenticated %}
-            <a href="{% url 'account_logout' %}" class="dropdown-item" aria-label="logout">Logout</a>
+            <a href="{% url 'account_change_password' %}" class="dropdown-item nav-color" aria-label="Change password">Change password</a>
+            <a href="{% url 'account_logout' %}" class="dropdown-item" aria-label="logout">Sign out</a>
         {% else %}
             <a href="{% url 'account_signup' %}" class="dropdown-item" aria-label="Sign up">Sign up</a>
             <a href="{% url 'account_login' %}" class="dropdown-item" aria-label="Sign in">Sign in</a>
