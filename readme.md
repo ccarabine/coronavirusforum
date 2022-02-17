@@ -1859,7 +1859,7 @@ ___
 
 User stories are tested with the current features. All user stories passed the tests.
 
-[Click on the link to go to user stories testing ](https://github.com/ccarabine/coronavirusforum/blob/main/readme/user-story_testing.md)
+[Click on the link to go to user stories testing ](https://github.com/ccarabine/coronavirusforum/blob/main/readme/user_story_testing.md)
 
 ---
 ## ii. Automated testing <a name="automated-testing"></a>

@@ -1,4 +1,5 @@
 # Deployment steps
+[Click here to go to the Readme file ](https://github.com/ccarabine/coronavirusforum/blob/main/readme.md#deployment)
 ## Github
 
 This is the process I took to deploy my project from its GitHub repository to Github Pages:

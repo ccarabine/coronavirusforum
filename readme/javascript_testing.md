@@ -1,5 +1,5 @@
 # Javascript manual testing
-
+[Click here to go to the Readme file ](https://github.com/ccarabine/coronavirusforum/blob/main/readme.md#js-testing)
 
 ## Test 1 -Flash Message 
 

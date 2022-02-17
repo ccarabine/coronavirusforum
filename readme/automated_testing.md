@@ -1,5 +1,7 @@
 # Unit testing
 
+[Click here to go to the Readme file ](https://github.com/ccarabine/coronavirusforum/blob/main/readme.md#automated-testing)
+
 For the forum app the following unit test were run on the forms, models and views
 
 ### 1. Testing forms
