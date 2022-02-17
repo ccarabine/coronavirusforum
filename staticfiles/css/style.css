@@ -5,12 +5,14 @@
   box-sizing: border-box;
   /* padding and border are included in the width and height*/
 }
+
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   margin: 0;
   }
+
 main {
   flex-grow: 1;
   }
@@ -57,20 +59,18 @@ main {
 
 .nav-color {
   color: var(--color-nav);
-  background-color: var(-color-rich-black-fogra-29);
 }
 
 /* --- Header styling --- */
 .header-style {
   border-style: double;
   padding: 10px;
-
 }
+
 a.header-links:hover {
   text-decoration: underline;
   color: var(--color-white);
   cursor: pointer;
-
 }
 
 .header-paragraph {
@@ -103,7 +103,18 @@ a.card-links:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
 }
 
+/* --- Post card styling --- */
+.card {
+  border: none
+}
 
+.card-body {
+  padding: 0px
+}
+.post-border {
+  border-style: solid;
+  padding: 3px;
+}
 
 /* Make the image fully responsive */
 .carousel-inner img {
@@ -112,21 +123,38 @@ a.card-links:hover {
 }
 
 .img-container {
-  overflow: none;
   width: 8rem;
-
 }
+
 .img-size{
 width:120px;
 }
 
-/* --- Post card styling --- */
-.card {
-  border: none
+
+/* --- voting thumbs --- */
+.hide {
+  display: none;
 }
 
-.card-body {
-  padding: 0px
+.active {
+  color: var(--color-caribbean-green)
+}
+
+.not-active {
+  color: var(--color-skobeloff);
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.fa,
+.fab,
+.fad,
+.fal,
+.far,
+.fas {
+  line-height: 1.5;
 }
 
 /* --- Pagination --- */
@@ -145,10 +173,6 @@ width:120px;
   color: var(--color-white);
 }
 
-.post-border {
-  border-style: solid;
-  padding: 3px;
-}
 
 /* --- Form styling --- */
 .asteriskField {
@@ -318,31 +342,6 @@ footer ul li:nth-child(3) a:before {
   text-align: center;
 }
 
-/* --- voting thumbs --- */
-.hide {
-  display: none;
-}
-
-.active {
-  color: var(--color-caribbean-green)
-}
-
-.not-active {
-  color: var(--color-skobeloff);
-}
-
-.cursor {
-  cursor: pointer;
-}
-
-.fa,
-.fab,
-.fad,
-.fal,
-.far,
-.fas {
-  line-height: 1.5;
-}
 
 /* --- General helper styling --- */
 .mar-right {
@@ -365,7 +364,21 @@ footer ul li:nth-child(3) a:before {
 .center {
   text-align: center;
 }
+a{
+  color:blue;
+}
+.container-fluid{
+  padding-right:0px;
+}
 
+/* --- color styling --- */
+.background-color-main {
+  background-color: var(--color-maximum-blue-2);
+}
+
+.row{
+  margin-right: 0px;
+}
 @media screen and (max-width: 725px) {
 
   .carousel-inner img {
@@ -374,7 +387,6 @@ footer ul li:nth-child(3) a:before {
   }
 
   .header-paragraph {
-
     font-size: 1em;
     padding-right: 5px;
     padding-left: 5px;

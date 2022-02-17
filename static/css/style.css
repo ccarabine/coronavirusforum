@@ -131,7 +131,6 @@ width:120px;
 }
 
 
-
 /* --- voting thumbs --- */
 .hide {
   display: none;
@@ -173,7 +172,6 @@ width:120px;
   background-color: var(--color-skobeloff);
   color: var(--color-white);
 }
-
 
 
 /* --- Form styling --- */
@@ -345,7 +343,6 @@ footer ul li:nth-child(3) a:before {
 }
 
 
-
 /* --- General helper styling --- */
 .mar-right {
   margin-right: 10px;
@@ -390,7 +387,6 @@ a{
   }
 
   .header-paragraph {
-
     font-size: 1em;
     padding-right: 5px;
     padding-left: 5px;

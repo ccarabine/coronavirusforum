@@ -1,11 +1,16 @@
+/*global bootstrap:false*/
+/*jshint esversion:6*/
+
 // Message variables
 const messages = document.getElementById('msg');
 const alert = new bootstrap.Alert(messages);
 
-// vote varaibles
-const upVote = document.getElementById('upVote')
-const downVote = document.getElementById('downVote')
-const voteForm = document.getElementById('voteForm')
+// vote variables
+const upVote = document.getElementById('upVote');
+const downVote = document.getElementById('downVote');
+const voteForm = document.getElementById('voteForm');
+const upThumb = document.getElementById('upThumb');
+const downThumb = document.getElementById('downThumb');
 
 if (messages)
   setTimeout(function () {
@@ -14,14 +19,14 @@ if (messages)
 
 if (upVote) {
   upThumb.addEventListener('click', (e) => {
-    e.preventDefault()
-    upVote.checked = true
-    voteForm.submit()
-  })
+    e.preventDefault();
+    upVote.checked = true;
+    voteForm.submit();
+  });
 
   downThumb.addEventListener('click', (e) => {
-    e.preventDefault()
-    downVote.checked = true
-    voteForm.submit()
-  })
+    e.preventDefault();
+    downVote.checked = true;
+    voteForm.submit();
+  });
 }
