@@ -1879,7 +1879,7 @@ User stories are tested with the current features. All user stories passed the t
 ___
 
 ## v. Javascript testing:<a name="js-testing"></a>
-[Click on the link to go to Javascript testing](https://github.com/ccarabine/coronavirusforum/blob/main/readme/docs/javascript_testing.md)
+[Click on the link to go to Javascript testing](https://github.com/ccarabine/coronavirusforum/blob/main/readme/javascript_testing.md)
 
 
 ___
@@ -2027,8 +2027,11 @@ I have used these third-party libraries for this project for the following reaso
 -  from django.views.generic import ListView, DetailView, UpdateView
 -  from django.views.generic import DeleteView, CreateView
 <br>
+
     Class-based views provide an alternative way to implement views as Python objects instead of functions.
+
 <br>
+
 -  I used class based views for the following reasons
     - Code reusability - a view class can be inherited by another view class and modified for a different use case.
     - DRY -  help to reduce code duplication

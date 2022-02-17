@@ -1,4 +1,4 @@
-## Known issues during development <a name="known-issues"></a>
+## Known issues during development </a>
 
 [Click here to go to the Readme file ](https://github.com/ccarabine/coronavirusforum/blob/main/readme.md#known-issues)
 
