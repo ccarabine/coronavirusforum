@@ -85,7 +85,6 @@ Run server to test `python3 manage.py runserver`
 |Reference env.py| <br><code>From pathlib import Path </code>
 ||<code>Import os</code>|
 ||<code>Import dj_database_url</code>|
-<br>
 ||<code>If os.path.isfile(“env.py”): </code>|
 ||<code>     Import env</code>||
 

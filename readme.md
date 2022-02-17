@@ -23,7 +23,7 @@ ___
     v. [Surface](#surface)<br>
       
 2. [Features](#features)<br>
-    i. [Current Features](#features-current)<br>
+    i. [Current Features](#features-existing)<br>
     ii. [Features to implement](#features-toimplement)<br>
 
 3. [Testing](#testing)<br>
@@ -582,7 +582,7 @@ Please refer to further details in credits section for specific images used with
 
 # 2. Features <a name="features"></a> 
 
-## Existing features
+## Existing features <a name="features-existing"></a>
 
 ### **Feature 1 Navigation bar**
 
@@ -791,7 +791,9 @@ The homepage consists
 - Post title, number of comments, posted by and created time fields displayed
 - Navigation bar for users to view other pages
 <br>
+
 ### Access
+
 | No. | Features |Not logged in | Logged in | Admin |
 | ------ | ------ | ------ | ------ | ------ |
 | 3 | Home page| Yes| Yes|Yes|
@@ -1857,28 +1859,27 @@ ___
 
 User stories are tested with the current features. All user stories passed the tests.
 
-[Click on the link to go to user stories testing ](https://github.com/ccarabine/coronavirus/blob/main/readme/docs/user-story_testing.md)
+[Click on the link to go to user stories testing ](https://github.com/ccarabine/coronavirusforum/blob/main/readme/user-story_testing.md)
 
 ---
 ## ii. Automated testing <a name="automated-testing"></a>
 
-[Click on the link to go to automated testing](https://github.com/ccarabine/coronavirus/blob/main/readme/docs/automated_testing.md)
-
+[Click on the link to go to automated testing](https://github.com/ccarabine/coronavirusforum/blob/main/readme/automated_testing.md)
 
 ---
 ## iii. Known issues during development and testing <a name="known-issues"></a>
 
-[Click on the link to go to Known issues during development and testing](https://github.com/ccarabine/coronavirus/blob/main/readme/docs/known_issues.md)
+[Click on the link to go to Known issues during development and testing](https://github.com/ccarabine/coronavirusforum/blob/main/readme/known_issues.md)
 
 
 ---
 ## iv. Validation testing:<a name="validation-testing"></a>
-[Click on the link to go to Validation testing](https://github.com/ccarabine/coronavirus/blob/main/readme/docs/validation_testing.md)
+[Click on the link to go to Validation testing](https://github.com/ccarabine/coronavirusforum/blob/main/readme/validation_testing.md)
 
 ___
 
 ## v. Javascript testing:<a name="js-testing"></a>
-[Click on the link to go to Javascript testing](https://github.com/ccarabine/coronavirus/blob/main/readme/docs/javascript_testing.md)
+[Click on the link to go to Javascript testing](https://github.com/ccarabine/coronavirusforum/blob/main/readme/docs/javascript_testing.md)
 
 
 ___
@@ -1898,7 +1899,7 @@ No unfixed bugs
 ___
 
 # 4. Deployment <a name="deployment"></a> 
-[Click on the link to go to deployment ](https://github.com/ccarabine/payroll/blob/main/readme/docs/deployment.md)
+[Click on the link to go to deployment ](https://github.com/ccarabine/coronavirusforum/blob/main/readme/deployment.md)
 
 
 ___

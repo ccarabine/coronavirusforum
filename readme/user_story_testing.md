@@ -4,6 +4,7 @@
 
 ## Testing of Feature 1 - Navigation 
 User stories
+
 - 2.1 As a site user I can intuitively navigate the site so that the layout of the site is consistent
 - 2.2 As a site user I can search post title so that I can locate posts
 - 2.3 As a site user I can click on the menu so that I can select topics and other pages to view
@@ -62,16 +63,15 @@ Action|Expected result| Actual result| Status|
 |5.|“Change password” is displayed in the drop down menu|[Dropdown menu](docs/images/testing/features/test1_9.png)|Passed|
 || “Logout” is displayed in the drop down menu |see dropdown menu link above|Passed|
 
+___
 
 ## Testing of Feature 2 - Footer
 User stories
-3.1 As a site user I can locate the social media accounts so that I can follow their updates
 
-3.2 As a guest/logged-in site user I can view the 'about us page so that I can understand more about the forum and its purpose
-
-3.3 As a guest/logged-in site user I can view the 'talk guidelines page so that I can understand the rules
-
-3.4 As a guest/logged-in site user I can complete a contact form so that I can provide feedback on posts to site admin where needed (report offending posts or express concern) so that appropriate action can be taken if needed
+- 3.1 As a site user I can locate the social media accounts so that I can follow their updates
+- 3.2 As a guest/logged-in site user I can view the 'about us page so that I can understand more about the forum and its purpose
+- 3.3 As a guest/logged-in site user I can view the 'talk guidelines page so that I can understand the rules
+- 3.4 As a guest/logged-in site user I can complete a contact form so that I can provide feedback on posts to site admin where needed (report offending posts or express concern) so that appropriate action can be taken if needed
 
 ___
 
@@ -96,14 +96,16 @@ Action|Expected result| Actual result| Status|
 |6.|Twitter page is displayed in new tab|[Result ](docs/images/testing/features/test2_8.png)|Passed|
 |7.|Instagram page is displayed in new tab|[Result ](docs/images/testing/features/test2_9.png)|Passed|
 
+___
 
 ## Testing of feature 3 - home page
 User stories
-4.1 As a site user I can view the header and hero image so that I can learn more about the website and its purpose
 
-4.2 As a site user I can click on the menu so that I can select topics and other pages to view
+- 4.1 As a site user I can view the header and hero image so that I can learn more about the website and its purpose
 
-4.3 a guest/logged-in user I can view the latest 5 posts so that I can keep up to date with the latest posts
+- 4.2 As a site user I can click on the menu so that I can select topics and other pages to view
+
+- 4.3 a guest/logged-in user I can view the latest 5 posts so that I can keep up to date with the latest posts
 
 **Action** 
 1. Navigate to https://coronavirusforum.herokuapp.com/
@@ -120,26 +122,20 @@ Action|Expected result| Actual result| Status|
 |2.|Flash message section is displayed|[Result ](docs/images/testing/features/test3_4.png)|Passed|
 |3.|Post detail is displayed|[Result ](docs/images/testing/features/test3_5.png)|Passed|
 
+___
 
 ## Testing of feature 4 - Account Management
 User stories
-1.1 As a site user I can login with my username and password so that I can access the sites full functionality 
 
-1.2 As a site user I can login with google so that I can save time and login securely
-
-1.3 As a site user I can change my password so that I can stay secure
-
-1.4 As a logged-in site user I can log out of my account so that other users cannot access my account
-
-1.5 As a site user I can see the current logged-in state so that I know if I can access logged in functionality
-
-1.6 As a site user I can register so that I have a role-based login and functionality of commenting and voting on posts
-
-1.7 As a site user I can receive a welcome email so that I know that I have signed up correctly and feel like a valued user
-
-6.4 As a site admin I can restrict/delete a user account in django admin page if the content is offending or against 'talk guidelines' so that I can manage the site content for the best UX
-
-6.5 As a site admin I can manage user accounts so that I can create new users, update their details, deactivate their status
+- 1.1 As a site user I can login with my username and password so that I can access the sites full functionality 
+- 1.2 As a site user I can login with google so that I can save time and login securely
+- 1.3 As a site user I can change my password so that I can stay secure
+- 1.4 As a logged-in site user I can log out of my account so that other users cannot access my account
+- 1.5 As a site user I can see the current logged-in state so that I know if I can access logged in functionality
+- 1.6 As a site user I can register so that I have a role-based login and functionality of commenting and voting on posts
+- 1.7 As a site user I can receive a welcome email so that I know that I have signed up correctly and feel like a valued user
+- 6.4 As a site admin I can restrict/delete a user account in django admin page if the content is offending or against 'talk guidelines' so that I can manage the site content for the best UX
+- 6.5 As a site admin I can manage user accounts so that I can create new users, update their details, deactivate their status
 
 ___
 All functionality has been tested fully from allauth
@@ -185,7 +181,9 @@ Action|Expected result| Actual result| Status|
 
 
 ### **Test 3 - Change password**
-1.3 As a site user I can change my password so that I can stay secure
+User stories 
+
+- 1.3 As a site user I can change my password so that I can stay secure
 
 **Action** 
 1. Navigate and click on Sign in
@@ -202,7 +200,9 @@ Action|Expected result| Actual result| Status|
 
 
 ### **Test 3a - Forgot password**
-1.3 As a site user I can change my password so that I can stay secure
+User stories
+
+- 1.3 As a site user I can change my password so that I can stay secure
 
 **Action** 
 1. Navigate, click on Sign in, click on forgot password link
@@ -295,37 +295,25 @@ Action|Expected result| Actual result| Status|
 |5.| Confirmation page displayed |[Result ](docs/images/testing/features/test4_7_5.png)|Passed|
 |6.| Message displayed “Successfully deleted 1 user. |[Result ](docs/images/testing/features/test4_7_6.png)|Passed|
 
-
+___
 
 ## Testing of feature 5 - Posts
 User stories
-5.1 As a guest user, I can view posts so that I can keep up to date with the latest posts and user comments
 
-5.2 As a Site User I can view a paginated list of posts so that my screen doesn't get overpopulated with posts
-
-5.3 As a guest/logged-in site user, I can select a topic so I can view posts related to the topic
-
-5.4 As a guest/logged-in user I can view a list of posts so that I can select a post that interests me
-
-5.5 As a guest/logged-in user I can click on a post so that I can read the full article and related comments
-
-5.6 As a logged-in site user I can vote on a post/opinion poll, where applicable, so that I can take an active role in the forum if I wish
-
-5.7 As a logged-in user I can create a new post so that I can post content on the site for other users to view
-
-5.8 As a logged in site user I can edit a post (subject header /text body) so that I can change the content if required
-
-5.9 As a logged-in site user I can leave comments on a post so that I can take an active role in the forum (be involved in the conversation/express my opinion)
-
-5.10 As a Site User, I can view a paginated list of comments so that my screen doesn't get overpopulated with comments
-
-5.11 As a Site User I can delete a post that I have posted so that I can take content off the website
-
-5.12 As a user I can report a post to site admin so that I can provide feedback on posts on offending posts or express concern so that appropriate action can be taken if needed
-
-5.13. As a user who is directed to a non-existent page or resource, I can receive feedback and be redirected back to the main page automatically/smoothly without having to use the browser navigation buttons so that I have a streamlined UX
-
-6.3 As a Site Admin user I can view, update and delete posts in django admin page so that I can manage content or information that might be breaching policy or upon the request of a user/poster
+- 5.1 As a guest user, I can view posts so that I can keep up to date with the latest posts and user comments
+- 5.2 As a Site User I can view a paginated list of posts so that my screen doesn't get overpopulated with posts
+- 5.3 As a guest/logged-in site user, I can select a topic so I can view posts related to the topic
+- 5.4 As a guest/logged-in user I can view a list of posts so that I can select a post that interests me
+- 5.5 As a guest/logged-in user I can click on a post so that I can read the full article and related comments
+- 5.6 As a logged-in site user I can vote on a post/opinion poll, where applicable, so that I can take an active role in the forum if I wish
+- 5.7 As a logged-in user I can create a new post so that I can post content on the site for other users to view
+- 5.8 As a logged in site user I can edit a post (subject header /text body) so that I can change the content if required
+- 5.9 As a logged-in site user I can leave comments on a post so that I can take an active role in the forum (be involved in the conversation/express my opinion)
+- 5.10 As a Site User, I can view a paginated list of comments so that my screen doesn't get overpopulated with comments
+- 5.11 As a Site User I can delete a post that I have posted so that I can take content off the website
+- 5.12 As a user I can report a post to site admin so that I can provide feedback on posts on offending posts or express concern so that appropriate action can be taken if needed
+- 5.13. As a user who is directed to a non-existent page or resource, I can receive feedback and be redirected back to the main page automatically/smoothly without having to use the browser navigation buttons so that I have a streamlined UX
+- 6.3 As a Site Admin user I can view, update and delete posts in django admin page so that I can manage content or information that might be breaching policy or upon the request of a user/poster
 
 ___
 
@@ -405,8 +393,6 @@ Action|Expected result| Actual result| Status|
 |8.|Message displayed post deleted|[Result ](docs/images/testing/features/test5_4_8.png)|Passed|
 ||Redirected to home page|See link above|Passed|
 
-
-
 ### **Test 5 - Comment on a post**
 
 See feature 8
@@ -448,10 +434,12 @@ Action|Expected result| Actual result| Status|
 |5.| Confirmation page displayed |[Result ](docs/images/testing/features/test5_8_5.png)|Passed|
 |6.| Message displayed “Successfully deleted 1 post". |[Result ](docs/images/testing/features/test5_8_6.png)|Passed|
 
+___
 
 ## Testing of feature 6 - Voting
 User stories
-5.6 As a logged-in site user I can vote on a post/opinion poll, where applicable, so that I can take an active role in the forum if I wish
+
+- 5.6 As a logged-in site user I can vote on a post/opinion poll, where applicable, so that I can take an active role in the forum if I wish
 ___
 
 **Action** 
@@ -483,10 +471,12 @@ Action|Expected result| Actual result| Status|
 |9.|success message displayed "downthumb selected", downthumb highlighted and downthumb number increased| [Result ](docs/images/testing/features/test6_1_9.png)|Passed|
 |10.|success message displayed "upthumb selected",upthumb highlighted, down thumb not highlighted and downthumb number decrease and upthumb increase by 1|[Result ](docs/images/testing/features/test6_1_10.png)|Passed|
 
+___
 
 ## Testing of Feature 7 -Report post
 User stories
-5.12 As a user I can report a post to site admin so that I can provide feedback on posts on offending posts or express concern so that appropriate action can be taken if needed
+
+- 5.12 As a user I can report a post to site admin so that I can provide feedback on posts on offending posts or express concern so that appropriate action can be taken if needed
 
 **Action** 
 1. Navigate to the topic in the main menu and select a topic and click on a post with comments (not signed in)
@@ -508,15 +498,14 @@ Action|Expected result| Actual result| Status|
 |6.|message displayed "Email sent successfully", on the template message " thanks twickenhamteacher"|[Result ](docs/images/testing/features/test7_1_6.png)|Passed|
 ||Email received by admin |[Result ](docs/images/testing/features/test7_1_7.png)|Passed|
 
+___
 
 ## Testing of Feature 8 - Comments
 User stories
 
-5.9 As a logged-in site user I can leave comments on a post so that I can take an active role in the forum (be involved in the conversation/express my opinion)
-
-5.10 As a Site User, I can view a paginated list of comments so that my screen doesn't get overpopulated with comments
-
-6.2 As a site admin I can create, edit and delete comments on the Django admin page so that I can manage the site content for the best UX
+- 5.9 As a logged-in site user I can leave comments on a post so that I can take an active role in the forum (be involved in the conversation/express my opinion)
+- 5.10 As a Site User, I can view a paginated list of comments so that my screen doesn't get overpopulated with comments
+- 6.2 As a site admin I can create, edit and delete comments on the Django admin page so that I can manage the site content for the best UX
 
 **Action** 
 1. Navigate to the topic in the main menu and select a topic and click on a post with comments (not signed in)
@@ -540,6 +529,7 @@ Action|Expected result| Actual result| Status|
 |7.|Success message displayed "Comment added", redirected to post detail page with comment|[Result ](docs/images/testing/features/test8_1_6_1.png)|Passed|
 ||Post with more than 5 comments - paginated by 5|[Result ](docs/images/testing/features/test8_1_8.png)|Passed|
 
+___
 
 ### **Test 2 - Create, edit and delete comment by admin panel**
 
@@ -562,12 +552,14 @@ Action|Expected result| Actual result| Status|
 |5.| Confirmation page displayed |[Result ](docs/images/testing/features/test8_2_5.png)|Passed|
 |6.| Message displayed “Successfully delete 1 comment". |[Result ](docs/images/testing/features/test8_2_6.png)|Passed|
 
+___
 
 ## Testing of Feature 9 -Topics
 User stories
-5.3 As a guest/logged-in site user, I can select a topic so I can view posts related to the topic
-5.4 As a guest/logged-in user I can view a list of posts so that I can select a post that interests me
-6.1 As a site admin I can create, edit and delete topic title on the Django admin page so that I can manage the site content for the best UX
+
+- 5.3 As a guest/logged-in site user, I can select a topic so I can view posts related to the topic
+- 5.4 As a guest/logged-in user I can view a list of posts so that I can select a post that interests me
+- 6.1 As a site admin I can create, edit and delete topic title on the Django admin page so that I can manage the site content for the best UX
 
 ### **Test 1 - Topic list and post list**
 **Action** 
@@ -602,12 +594,14 @@ Action|Expected result| Actual result| Status|
 |5.| Confirmation page displayed |[Result ](docs/images/testing/features/test9_1_7.png)|Passed|
 |6.| Message displayed “Successfully delete 1 topic". |[Result ](docs/images/testing/features/test9_1_8.png)|Passed|
 
-
+___
 
 ## Testing of Feature 10 -Latest statistics
 User stories
-3.5 As a site user I can access reputable up to date data/support via a reliable and trustworthy source (such as the NHS/public health England) so that I am correctly informed and can stay up to date with statistics
-3.6 As a site user, i can receive feedback if an API call fails, so that I receive a graceful UX and be correctly notified
+
+- 3.5 As a site user I can access reputable up to date data/support via a reliable and trustworthy source (such as the NHS/public health England) so that I am correctly informed and can stay up to date with statistics
+
+- 3.6 As a site user, i can receive feedback if an API call fails, so that I receive a graceful UX and be correctly notified
 
 **Action** 
 1. Navigate and click on Latest statistics link in the main menu
@@ -626,9 +620,12 @@ Action|Expected result| Actual result| Status|
 |4.|Dates are not able to be selected|[Result ](docs/images/testing/features/test10_1_6.png)|Passed|
 |5.|500 error page displayed|[Result ](docs/images/testing/features/test10_1_7.png)|Passed|
 
+___
+
 ## Testing of Feature 11 - About us
 User stories
-3.2 As a guest/logged-in site user I can view the 'about us page so that I can understand more about the forum and its purpose
+
+- 3.2 As a guest/logged-in site user I can view the 'about us page so that I can understand more about the forum and its purpose
 on the main menu
 
 **Action** 
@@ -644,9 +641,12 @@ Action|Expected result| Actual result| Status|
 |2.|Government guidelines page displayed|[Result ](docs/images/testing/features/test11_1_4.png)|Passed|
 |3.|NHS help and support  page displayed|[Result ](docs/images/testing/features/test11_1_5.png)|Passed|
 
+___
+
 ## Testing of Feature 12 -Contact us
 User stories
-3.4 As a guest/logged-in site user I can complete a contact form so that I can provide feedback on posts to site admin where needed (report offending posts or express concern) so that appropriate action can be taken if needed
+
+- 3.4 As a guest/logged-in site user I can complete a contact form so that I can provide feedback on posts to site admin where needed (report offending posts or express concern) so that appropriate action can be taken if needed
 
 **Action** 
 1. Navigate and click on Contact us link in the footer
@@ -668,9 +668,12 @@ Action|Expected result| Actual result| Status|
 |6.|Message displayed "Email sent successfully", on the template message " thanks" USERNAME"|[Result ](docs/images/testing/features/test12_1_6.png)|Passed|
 ||Email received by admin |[Result ](docs/images/testing/features/test12_1_7.png)|Passed|
 
+___
+
 ## Testing of Feature 13 -Talk guidelines
 User stories
-3.3 As a guest/logged-in site user I can view the 'talk guidelines page so that I can understand the rules
+
+- 3.3 As a guest/logged-in site user I can view the 'talk guidelines page so that I can understand the rules
 
 **Action** 
 1. Navigate and click on talk guideline link in the footer
@@ -683,9 +686,12 @@ Action|Expected result| Actual result| Status|
 ------------ | ------------ | ------------ |------------ |
 |1,2,3.|talkguide lines displayed|[Small ](docs/images/testing/features/test13_1_1.png)[Medium ](docs/images/testing/features/test13_1_2.png)[Large](docs/images/testing/features/test13_1_3.png)|Passed|
 
+___
+
 ## Testing of Feature 14 -Privacy policy
 User stories
-3.7 As a guest/logged-in site user I can view the ‘privacy policy’ so that I can understand the rules
+
+- 3.7 As a guest/logged-in site user I can view the ‘privacy policy’ so that I can understand the rules
 
 **Action** 
 1. Navigate and click on privacy policy link in the footer
@@ -696,10 +702,13 @@ Action|Expected result| Actual result| Status|
 ------------ | ------------ | ------------ |------------ |
 |1.|Privacy policy displayed|[Small ](docs/images/testing/features/test14_1_1.png)[Medium ](docs/images/testing/features/test14_1_2.png)[Large](docs/images/testing/features/test14_1_3.png)|Passed|
 
+___
+
 ## Testing of Feature 15 -Search
 User stories
-7.1. As a site user I can search posts by title so I can view posts that interest me
-7.2. As a site user I can search posts by title so I can view a paginated list of posts  so they don’t over populate the page
+
+- 7.1. As a site user I can search posts by title so I can view posts that interest me
+- 7.2. As a site user I can search posts by title so I can view a paginated list of posts  so they don’t over populate the page
 
 **Action** 
 1. Navigate and click on Search bar in the nav bar, user types a post title "post" 
