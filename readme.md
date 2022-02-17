@@ -30,7 +30,7 @@ ___
 
     i. [User Stories/feature testing](#user-stories-testing)<br>
     ii.  [Automated testing](#automated-testing)<br>
-    iii.  [Known issues during testing](#known-issues)<br>
+    iii.  [Known issues during development and testing](#known-issues)<br>
     iv. [Validation testing  ](#validation-testing)<br>
     v. [Javascript testing](#js-testing)<br>
     vi. [Unfixed bugs](#unfixed-bugs)<br>
@@ -2026,12 +2026,8 @@ I have used these third-party libraries for this project for the following reaso
 
 -  from django.views.generic import ListView, DetailView, UpdateView
 -  from django.views.generic import DeleteView, CreateView
-<br>
 
-    Class-based views provide an alternative way to implement views as Python objects instead of functions.
-
-<br>
-
+Class-based views provide an alternative way to implement views as Python objects instead of functions.
 -  I used class based views for the following reasons
     - Code reusability - a view class can be inherited by another view class and modified for a different use case.
     - DRY -  help to reduce code duplication
