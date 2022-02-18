@@ -265,6 +265,7 @@ def email_success(request):
     return HttpResponse("<p>%s</p>" % res)
 
 
+# Adapted code from https://www.youtube.com/watch?v=onZ69P9wS2o
 @login_required
 def VoteView(request, pk):
     """
