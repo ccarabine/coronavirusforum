@@ -771,3 +771,30 @@ User doesn't enter a search criteria and clicks enter, Topic header is empty, no
 - **Corrective Action:** 
 
     Add a criteria, if topic doesn't exist then display "No search criteria entered"
+
+___
+
+- **Issue 8 :** 
+
+When a success message is displayed a small button appears after the message
+
+<details>
+<summary>Click here to view image </summary>
+
+![screenshot of issue](docs/images/testing/development/issue_11_1.png)
+
+</details>
+
+
+<details>
+<summary>Click here to view image </summary>
+
+![screenshot of issue](docs/images/testing/development/issue_11_2.png)
+
+</details>
+
+<br>
+
+- **Corrective Action:** 
+
+    Removed button from alert message in base.html
